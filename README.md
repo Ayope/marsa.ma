@@ -1,4 +1,5 @@
-<h1> Application de gestion du port </h1>
+# Application for fishing port management
 
+## Description:
 
-une platforme pour gestionner les ports
+**PORT Online** is a platform where administrations of fishing ports can manage fishers, exports and imports fishes, online marketplace, port security and we will have two types of fishers the first type is the small fishers can sell their fishes to the client at the marketplace and buy or sell fishing equipements (fishing boats, fishing materiales) and the second type of fishers that are more of employees for the port that their job is to fish fishes for port so they can ship it to the port collaborators also the delivery guys have their own part of our platform where we have two types of delivery guys the first ones they can deliver fishes to client and they will be associated with the fisher and we will also have the delivery guys that are employees for port administration with bigger tasks to deliver fishes from port to collaborators and they associated with the port administration the client can use the platform to buy fishes from small marketplace and get thier fish to the the house with the delivery guys
