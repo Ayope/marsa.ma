@@ -54,6 +54,7 @@
 >> 2.buyed fishes and fishing products\
 >> 3.market information (access market information such as price and products trends and demand)\
 >> 4.List of subscribers and the amount of fish to deliver to them\
+
 > IV- the weather condition *both* for the fishport sea to help fisher plan his fishing trip *(freelance fishers only)*\
 > V- A list of his schedule fishing trips\
 > VI- Regulatory compliance\
@@ -63,7 +64,7 @@
 > I- Fishers can make contract with the delivery guys to hire them [Add/Delete delivery guys]
 
 5- Schedule his time to go out to fish [Add / Delete / Update schedule]
-> *Must wait for administration acceptance *(freelance fishers only)*
+> Must wait for administration acceptance *(freelance fishers only)*
 
 
 ## As delivery guy I can:
@@ -118,4 +119,4 @@
 
 ## Tools:
 
-JIRA | FIGMA | LUCIDCHART | GIT | GITHUB | HTML | CSS [bootstrap/ Tailwind] | JavaScript [or Vue.js] | PHP [or Laravel] | SQL
+JIRA | FIGMA | LUCIDCHART | GIT | GITHUB | HTML | CSS [bootstrap/ Tailwind] | JavaScript [or Vue.js] | PHP [or Laravel] | SQL | UML | MERISE [MLD]
