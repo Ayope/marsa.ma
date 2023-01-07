@@ -108,7 +108,8 @@
 4- Security role:
 > I- Security have also a profile in application [Created by administration/ Update / Delete]\
 > II- Display:
->> 1.A list of tasks to do\
+>> 1.A list of tasks to do
+
 > III- Can get requests from admin
 
 5- Admin have:
