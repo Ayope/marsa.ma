@@ -49,11 +49,11 @@
 3- Display:
 > I- profile page\
 > II - display Informations about him *both* and his boats *(freelance fishers only)*\
-> III- dashboard for statistique : *(freelance fishers only)*\
-1.imports\
-2.buyed fishes and fishing products\
-3.market information (access market information such as price and products trends and demand)\
-4.List of subscribers and the amount of fish to deliver to them\
+> III- dashboard for statistique : *(freelance fishers only)*
+>> 1.imports\
+>> 2.buyed fishes and fishing products\
+>> 3.market information (access market information such as price and products trends and demand)\
+>> 4.List of subscribers and the amount of fish to deliver to them\
 > IV- the weather condition *both* for the fishport sea to help fisher plan his fishing trip *(freelance fishers only)*\
 > V- A list of his schedule fishing trips\
 > VI- Regulatory compliance\
@@ -97,8 +97,8 @@
 
 2- Technicien role: [freelancer and employee]
 > I- technicien have also a profile in application [Create (wait to be accepted)/ Update / Delete]\
-> II- Display:\
-1.A list of tasks to do (requests from free fishers or Admin to fix boats)
+> II- Display:
+>> 1.A list of tasks to do (requests from free fishers or Admin to fix boats)
 
 3- Port security management (by Admin)
 > I- hire security\
@@ -107,8 +107,8 @@
 
 4- Security role:
 > I- Security have also a profile in application [Created by administration/ Update / Delete]\
-> II- Display:\
-1.A list of tasks to do\
+> II- Display:
+>> 1.A list of tasks to do\
 > III- Can get requests from admin
 
 5- Admin have:
