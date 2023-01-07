@@ -12,7 +12,7 @@
 > 3.Job search\
 > 4.Chat live
 
-### As Admin I can :
+## As Admin I can :
 1- Manage fishes [exports and imports] (both fished by the employees and by freelance fishers)
 > I- A list of collaborators [Add {you can check it in the map of morocco} / Delete collaboraor]\
 > II- A list of warehouses to stock fishes [Add / Delete / Update warhouse]
@@ -39,7 +39,7 @@
 > II - Accept fishing trips time for freelance fishers [Accept / Delete]
 
 
-### As fisher I can:
+## As fisher I can:
 1- Create account and wait for administration acceptance *(freelance fishers only)*
 
 2- Sell in the Marketplace in the platform to the Clients or to Other fishers [Add / Delete / Update product] *(freelance fishers only)*
@@ -66,7 +66,7 @@
 > *Must wait for administration acceptance *(freelance fishers only)*
 
 
-### As delivery guy I can:
+## As delivery guy I can:
 
 1- Have profile page *both* [Create *(freelance delivery guys only)* / Update/ Delete account *both* ]
 
@@ -77,7 +77,7 @@
 > I- A list of jobs available with freelance fishers (before got applied in a job) *(freelance delivery guys only)*\
 > II- A list of Tasks of delivering to clients
 
-### As client I can:
+## As client I can:
 
 1- Have profile page [Create / Update/ Delete account]
 
@@ -90,7 +90,7 @@
 
 5- Rate delivery guy and the freelance fisher after got my fish
 
-### Bonus:
+## Bonus:
 
 1- Live auction using chat:
 > I- All clients have a notification or email or a post of a box of fishes with specific infos as the amount of fishes and the time of start and end so clients can 	enter the chat and bid on it
@@ -116,6 +116,6 @@
 > I- A list of equipment to help involve the infrastracture of port\
 > II- A list of plans to help involve the infrastracture of port
 
-### Tools:
+## Tools:
 
 JIRA | FIGMA | LUCIDCHART | GIT | GITHUB | HTML | CSS [bootstrap/ Tailwind] | JavaScript [or Vue.js] | PHP [or Laravel] | SQL
