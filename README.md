@@ -117,6 +117,10 @@
 > I- A list of equipment to help involve the infrastracture of port\
 > II- A list of plans to help involve the infrastracture of port
 
+6- Super Admin account 
+> I- Have all website administrator privileges
+> II- Can also manage website administrators
+
 ## Tools:
 
 JIRA | FIGMA | LUCIDCHART | GIT | GITHUB | HTML | CSS [bootstrap/ Tailwind] | JavaScript [or Vue.js] | PHP [or Laravel] | SQL | UML | MERISE [MLD]
