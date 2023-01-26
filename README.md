@@ -118,7 +118,7 @@
 > II- A list of plans to help involve the infrastracture of port
 
 6- Super Admin account 
-> I- Have all website administrator privileges
+> I- Have all website administrator privileges\
 > II- Can also manage website administrators
 
 ## Tools:
