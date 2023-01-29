@@ -70,6 +70,7 @@
 5- Schedule his time to go out to fish [Add / Delete / Update schedule]
 > Must wait for administration acceptance *(freelance fishers only)*
 
+6- Can add Jobs for freelancer delivery guys [Add / Delete / Update]
 
 ## As delivery guy I can:
 
