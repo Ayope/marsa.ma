@@ -57,7 +57,6 @@
 >> 1.imports\
 >> 2.buyed fishes and fishing products\
 >> 3.market information (access market information such as price and products trends and demand)\
->> 4.List of subscribers and the amount of fish to deliver to them\
 
 > IV- the weather condition *both* for the fishport sea to help fisher plan his fishing trip *(freelance fishers only)*\
 > V- A list of his schedule fishing trips\
@@ -90,11 +89,9 @@
 2- Display:
 > I- Marketplace [An e-commerce website structure]
 
-3- Can subscribe with a freelance fisher to get an amount and a type of fish weekly or monthly
+3- Buy fish or fish equipement and choose to pay in cash on delivery or Online
 
-4- Buy fish or fish equipement and choose to pay in cash on delivery or Online
-
-5- Rate delivery guy and the freelance fisher after got my fish
+4- Rate delivery guy and the freelance fisher after got my fish
 
 ## Bonus:
 
@@ -125,6 +122,8 @@
 6- Super Admin account 
 > I- Have all website administrator privileges\
 > II- Can also manage website administrators
+
+7- Client can subscribe with a freelance fisher to get an amount and a type of fish weekly or monthly
 
 ## Tools:
 
