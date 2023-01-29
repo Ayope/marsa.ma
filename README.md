@@ -31,10 +31,14 @@
 > I- A list of employee delivery guys [Add / Delete account]\
 > II - A list of freelance delivery guys that associated to the freelance fishers
 
-5- Manage marketplace
+5- Manage vehicles [Each vehicle have matricules and a name] :
+> I- A list of freelance delivery guys vehicles [Accept/Delete]\
+> II - A list of fishport vehicles (the ones used by employees) [Create/Update/Delete]
+
+6- Manage marketplace
 > I- Check for the products in the marketplace [Delete any unwanted products]
 
-6- Manage fishing trips:
+7- Manage fishing trips:
 > I- A list of fishing trips [Add / Update / Delete fishing trip] for employee\
 > II - Accept fishing trips time for freelance fishers [Accept / Delete]
 
