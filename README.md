@@ -57,6 +57,7 @@
 >> 1.imports\
 >> 2.buyed fishes and fishing products\
 >> 3.market information (access market information such as price and products trends and demand)\
+>> 4.average of reviews
 
 > IV- the weather condition *both* for the fishport sea to help fisher plan his fishing trip *(freelance fishers only)*\
 > V- A list of his schedule fishing trips\
