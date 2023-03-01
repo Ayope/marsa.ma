@@ -7,10 +7,11 @@
 → Admin - fisheman [employee - freelance] - delivery man [employee - freelance] - Clients
 
 ## Application features:
-> 1.Rating system for delivery guys and freelance fishers\
-> 2.Marketplace\
-> 3.Job search\
-> 4.Chat live (bonus)
+> 1.management of a fishport and resources\
+> 2.Rating system for delivery guys and freelance fishers\
+> 3.Marketplace\
+> 4.Job search\
+> 5.Chat live (bonus)
 
 ## As Admin I can :
 1- Manage fishes [exports and imports] (both fished by the employees and by freelance fishers)
