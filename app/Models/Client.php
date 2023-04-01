@@ -2,18 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Rating;
+use App\Models\Command;
+use App\Models\PaymentInfo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Client extends Model
 {
     use HasFactory;
 
     public function command(){
-        return $this->hasMany('Command');
+        return $this->hasMany(Command::class);
     }
 
     public function rating(){
-        return $this->hasMany('Rating');
+        return $this->hasMany(Rating::class);
+    }
+
+    public function paymentInfo(){
+        return $this->hasOne(PaymentInfo::class);
     }
 }

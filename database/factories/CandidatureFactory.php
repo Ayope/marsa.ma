@@ -21,8 +21,7 @@ class CandidatureFactory extends Factory
         return [
             'job_offer_id' => $this->faker->numberBetween(JobOffer::min('id'),JobOffer::max('id')),
             'fisher_id' => $this->faker->numberBetween(User::min('id'),User::max('id')),
-            'candidate_first_name' => $this->faker->firstName,
-            'candidate_last_name' => $this->faker->lastName,
+            'candidate_id' => $this->faker->numberBetween(User::min('id'),User::max('id')),
             'status' => $this->faker->randomElement(['pending', 'accepted', 'rejected']),
         ];
     }

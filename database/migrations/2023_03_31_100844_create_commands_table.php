@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('commands', function (Blueprint $table) {
             $table->id();
-            $table->string('address');
-            $table->string('phone');
-            $table->string('status');
-            $table->string('payment_methods');
             $table->unsignedBigInteger('delivery_man_id');
             $table->foreign('delivery_man_id')->references('id')->on('users');
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('users');
+            $table->string('status');
+            $table->string('payment_method');
             $table->timestamps();
         });
     }

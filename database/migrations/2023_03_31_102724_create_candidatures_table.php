@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('fisher_id');
             $table->foreign('job_offer_id')->references('id')->on('job_offers');
             $table->foreign('fisher_id')->references('id')->on('users');
-            $table->string('candidate_first_name');
-            $table->string('candidate_last_name');
+            $table->unsignedBigInteger('candidate_id');
+            $table->foreign('candidate_id')->references('id')->on('users');
             $table->string('status');
             $table->timestamps();
 

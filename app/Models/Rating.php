@@ -2,18 +2,32 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Client;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Rating extends Model
 {
     use HasFactory;
 
     public function client(){
-        return $this->belongsTo('Client');
+        return $this->hasOne(Client::class);
     }
 
     public function product(){
-        return $this->belongsTo('Product');
+        return $this->hasOne(Product::class);
     }
+
+    protected $fillable = [
+        'client_id',
+        'ratings',
+        'review',
+        'product_id',
+    ];
+
+    protected $hidden = [
+        'client_id',
+        'product_id',
+    ];
 }
