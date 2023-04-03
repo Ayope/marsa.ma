@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('price');
             $table->date('date_of_fishing');
             $table->text('description');
+            $table->string('status');  // (available - sold out (archive))
             $table->unsignedBigInteger('fisher_id');
             $table->foreign('fisher_id')->references('id')->on('users');
             $table->timestamps();
