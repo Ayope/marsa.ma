@@ -7,6 +7,7 @@ use App\Models\Fisher;
 use App\Models\Command;
 use App\Models\Vehicle;
 use App\Models\Candidature;
+use App\Models\DrivingLisense;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -32,6 +33,11 @@ class DeliveryMan extends Model
 
     public function user(){
         return $this->hasOne(User::class, 'delivery_man_id');
+    }
+
+    public function drivingLisense()
+    {
+        return $this->hasOne(DrivingLisense::class);
     }
 
 

@@ -1,0 +1,9 @@
+@media only screen and (max-width: 768px){
+    .img{
+        display: flex;
+        justify-content: center;
+    }
+    .containner{
+        flex-direction: column;
+    }
+}
