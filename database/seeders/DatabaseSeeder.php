@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             PaymentInfoSeeder::class,
             ProductCommandSeeder::class,
             RatingSeeder::class,
+            DrivingLisenseSeeder::class,
+            RolesAndPermissionsSeeder::class,
         ]);
     }
 }

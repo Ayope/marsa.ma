@@ -22,7 +22,6 @@ class VehicleFactory extends Factory
             'make' => $this->faker->word(),
             'model' => $this->faker->word(),
             'capacity' => $this->faker->numberBetween(1, 10),
-            'delivery_man' => $this->faker->name(),
             'photo' => $this->faker->imageUrl(640, 480, 'transport'),
             'type' => $this->faker->randomElement(['car', 'motorcycle', 'truck']),
             'insurance' => $this->faker->randomElement(['valid', 'expired']),

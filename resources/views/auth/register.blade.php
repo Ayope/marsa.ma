@@ -10,13 +10,9 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
-                        {{--
-                            return it back as it was when the size is less than 768 px
-                            - edit the width and the display flex div bellow and after it go to backend
-                        --}}
                     <div class="d-flex containner">
                         <div>
-                            <div class="mb-3 img w-25">
+                            <div class="mb-3 img w-25 w-100">
                                 <img id="image" src={{asset('images/yourPicture.png')}} height="140px" width="140px" style="border-radius:50%"/>
                                 <input type="file" id="imgInput" name="img"  style="display: none;" class="@error('img') is-invalid @enderror"/>
 
@@ -28,19 +24,19 @@
                             </div>
                         </div>
 
-                        <div class="w-75" >
-                        <div class="row mb-3">
-                            <label for="first-name" class="col-md-4 col-form-label text-md-end">{{ __('First name') }}</label>
+                        <div class="w-75 w-100 inputs" >
+                            <div class="row mb-3">
+                                <label for="first-name" class="col-md-4 col-form-label text-md-end">{{ __('First name') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="first-name" type="text" class="form-control @error('first-name') is-invalid @enderror" name="first-name" value="{{ old('first-name') }}" required autocomplete="first-name" autofocus>
+                                <div class="col-md-6">
+                                    <input id="first-name" type="text" class="form-control @error('first-name') is-invalid @enderror" name="first-name" value="{{ old('first-name') }}" required autocomplete="first-name" autofocus>
 
-                                @error('first-name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                    @error('first-name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                         </div>
 
                         <div class="row mb-3">
@@ -156,7 +152,7 @@
                                 </button>
                             </div>
                         </div>
-                        </div>
+                    </div>
                     </div>
                     </form>
                 </div>
@@ -232,7 +228,7 @@ const fisherInputs = `
     <label for="issuing_authority" class="col-md-4 col-form-label text-md-end">{{ __('Issuing Authority') }}</label>
 
     <div class="col-md-6">
-        <input id="issuing_authority" type="text" class="form-control @error('issuing_authority') is-invalid @enderror" name="issuing_authority" value="{{ old('issuing_authority') }}" required autocomplete="issuing_authority" autofocus>
+        <textarea id="issuing_authority" type="text" class="form-control @error('issuing_authority') is-invalid @enderror" name="issuing_authority" value="{{ old('issuing_authority') }}" required autocomplete="issuing_authority" autofocus></textarea>
 
         @error('issuing_authority')
             <span class="invalid-feedback" role="alert">

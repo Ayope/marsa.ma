@@ -3,7 +3,11 @@
         display: flex;
         justify-content: center;
     }
+}
+
+@media only screen and (max-width: 1000px){
     .containner{
         flex-direction: column;
+        justify-content: center;
     }
 }
