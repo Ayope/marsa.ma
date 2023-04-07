@@ -59,7 +59,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Role::create(['name' => 'fisher']);
             // ->givePermissionTo(['view_books', 'book_create', 'book_edit', 'book_show', 'book_delete', 'genre_filter']);
 
-        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'deliveryMan']);
             // ->givePermissionTo(['view_genres', 'genre_create', 'genre_edit', 'genre_show', 'genre_delete', 'genre_filter',
             //                     'view_books', 'book_edit', 'book_show', 'book_delete',
             //                     'view_users', 'view_roles', 'role_create', 'role_edit', 'role_show', 'role_delete', 'edit_user_role']);

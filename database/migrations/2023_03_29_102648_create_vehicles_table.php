@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('make');
             $table->string('model');
             $table->integer('capacity');
-            $table->string('photo')->nullable();
+            $table->string('photo');
             $table->string('type');
             $table->string('insurance');
             $table->unsignedBigInteger('delivery_man_id');

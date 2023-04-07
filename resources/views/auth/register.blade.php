@@ -84,31 +84,6 @@
                             </div>
                         </div>
 
-                        {{-- remove it from the dom until the user choose his role --}}
-
-                        {{-- turn this to dropdown --}}
-                        <div class="row mb-3">
-                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
-
-                            <div class="col-md-6">
-
-                                <select class="form-select" name="role" id="role" required>
-                                    <option value="1">Client</option>
-                                    <option value="2">Fisher</option>
-                                    <option value="3">Delivery Man</option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                        <div id="fishingLisenceInput">
-
-                        </div>
-
-                        <div id="Vehicle&DrivingLisenceInputs">
-
-                        </div>
-
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
@@ -133,9 +108,9 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
                         <div class="row mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
@@ -143,6 +118,28 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+
+                                <select class="form-select" name="role" id="role" value="{{ old('role') }}" required>
+                                    <option value="1">Client</option>
+                                    <option value="2">Fisher</option>
+                                    <option value="3">Delivery Man</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div id="fishingLisenceInput">
+
+                        </div>
+
+                        <div id="Vehicle&DrivingLisenceInputs">
+
                         </div>
 
                         <div class="row mb-0">
@@ -168,6 +165,8 @@ const VehicleDrivingLisenceInputs = document.getElementById('Vehicle&DrivingLise
 const roleSelect = document.getElementById('role');
 
 const fisherInputs = `
+    <h1>License</h1>
+
     <div class="row mb-3">
     <label for="license_number" class="col-md-4 col-form-label text-md-end">{{ __('License Number') }}</label>
 
@@ -211,24 +210,32 @@ const fisherInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="type" class="col-md-4 col-form-label text-md-end">{{ __('Type') }}</label>
+        <label for="type" class="col-md-4 col-form-label text-md-end">{{ __('License Type') }}</label>
 
-    <div class="col-md-6">
-        <input id="type" type="text" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" required autocomplete="type" autofocus>
+        <div class="col-md-6">
+            <select id="type" class="form-select @error('type') is-invalid @enderror" name="type" required>
+                <option value="Recreational">Recreational</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Sport">Sport</option>
+                <option value="Fly Fishing">Fly Fishing</option>
+                <option value="Saltwater">Saltwater</option>
+                <option value="Freshwater">Freshwater</option>
+            </select>
 
-        @error('type')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+            @error('type')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
     </div>
-    </div>
+
 
     <div class="row mb-3">
     <label for="issuing_authority" class="col-md-4 col-form-label text-md-end">{{ __('Issuing Authority') }}</label>
 
     <div class="col-md-6">
-        <textarea id="issuing_authority" type="text" class="form-control @error('issuing_authority') is-invalid @enderror" name="issuing_authority" value="{{ old('issuing_authority') }}" required autocomplete="issuing_authority" autofocus></textarea>
+        <textarea id="issuing_authority" type="text" class="form-control @error('issuing_authority') is-invalid @enderror" name="issuing_authority" required autocomplete="issuing_authority" autofocus>{{ old('issuing_authority') }}</textarea>
 
         @error('issuing_authority')
             <span class="invalid-feedback" role="alert">
@@ -268,6 +275,7 @@ const fisherInputs = `
 `;
 
 const DeliveryManInputs = `
+
     <div class="row mb-3">
     <label for="max_deliveries_in_day" class="col-md-4 col-form-label text-md-end">{{ __('Max Deliveries in a Day') }}</label>
 
@@ -281,6 +289,8 @@ const DeliveryManInputs = `
         @enderror
     </div>
     </div>
+
+    <h1>License</h1>
 
     <div class="row mb-3">
     <label for="license_number" class="col-md-4 col-form-label text-md-end">{{ __('License Number') }}</label>
@@ -378,6 +388,117 @@ const DeliveryManInputs = `
             </span>
         @enderror
     </div>
+    </div>
+
+    <h1>vehicle</h1>
+
+    <div class="row mb-3">
+        <label for="registration_matricule" class="col-md-4 col-form-label text-md-end">{{ __('Registration Matricule') }}</label>
+
+        <div class="col-md-6">
+            <input id="registration_matricule" type="text" class="form-control @error('registration_matricule') is-invalid @enderror" name="registration_matricule" value="{{ old('registration_matricule') }}" required autofocus>
+
+            @error('registration_matricule')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="make" class="col-md-4 col-form-label text-md-end">{{ __('Make') }}</label>
+
+        <div class="col-md-6">
+            <input id="make" type="text" class="form-control @error('make') is-invalid @enderror" name="make" value="{{ old('make') }}" required>
+
+            @error('make')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="model" class="col-md-4 col-form-label text-md-end">{{ __('Model') }}</label>
+
+        <div class="col-md-6">
+            <input id="model" type="text" class="form-control @error('model') is-invalid @enderror" name="model" value="{{ old('model') }}" required>
+
+            @error('model')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="row mb-3">
+
+        <label for="capacity" class="col-md-4 col-form-label text-md-end">{{ __('Capacity') }}</label>
+
+        <div class="col-md-6">
+            <div class="input-group">
+                <input id="capacity" type="number" class="form-control @error('capacity') is-invalid @enderror" name="capacity" value="{{ old('capacity') }}" required>
+
+                <div class="input-group-append">
+                    <span class="input-group-text rounded-0 rounded-end">KG</span>
+                </div>
+            </div>
+
+            @error('capacity')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="photo" class="col-md-4 col-form-label text-md-end">{{ __('Photo') }}</label>
+
+        <div class="col-md-6">
+            <input id="photo" type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
+
+            @error('photo')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="type" class="col-md-4 col-form-label text-md-end">{{ __('Type') }}</label>
+
+        <div class="col-md-6">
+            <select id="type" class="form-select @error('type') is-invalid @enderror" name="type" required>
+                <option value="motorcycle">motorcycle</option>
+                <option value="Pickup Truck">Pickup Truck</option>
+                <option value="Van">Van</option>
+            </select>
+
+            @error('type')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="insurance" class="col-md-4 col-form-label text-md-end">{{ __('Insurance') }}</label>
+
+        <div class="col-md-6">
+            <input id="insurance" type="text" class="form-control @error('insurance') is-invalid @enderror" name="insurance" value="{{ old('insurance') }}" required>
+
+            @error('insurance')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
     </div>
 
 `;

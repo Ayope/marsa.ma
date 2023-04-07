@@ -46,12 +46,14 @@ class DeliveryMan extends Model
         'delivery_man_id',
         'fisher_id',
         'vehicle_id',
+        'driving_lisence_id',
     ];
 
     protected $hidden = [
         'delivery_man_id',
         'fisher_id',
         'vehicle_id',
+        'driving_lisence_id',
     ];
 
 }
