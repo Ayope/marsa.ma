@@ -19,7 +19,7 @@
 
         <div class="col">
             <!-- card product -->
-            <div class="card card-product">
+            <div class="card card-product" style="height:100%">
                 <div class="card-body">
 
                     <!-- badge -->
@@ -78,7 +78,7 @@
         display: flex;
         justify-content: center;
         /* align-items: center; */
-        color: #751313;
+        color: #ffffff;
     }
 
     .hero-image h1 {

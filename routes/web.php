@@ -15,8 +15,6 @@ use App\Http\Controllers\Auth\AuthController;
 |
 */
 
-Route::view('/', 'product.store');
-
 Route::controller(AuthController::class)->group(function(){
     Route::get('register', 'registration')->name('register');
     // ->middleware('NowLogin');
@@ -37,11 +35,12 @@ Route::controller(ProductController::class)->group(function(){
     Route::get('productCreate', 'create')->name('productCreate');
     Route::post('product', 'store')->name('create.product');
 
-    Route::get('productEdit', 'edit')->name('productEdit');
+    Route::get('productEdit/{id}', 'edit')->name('productEdit');
     Route::post('product/{id}', 'update')->name('products.edit');
 
-    Route::post('delete', 'destroy')->name('products.destroy');
+    Route::post('delete/{id}', 'destroy')->name('product.destroy');
 
+    Route::post('search', 'search')->name('search');
 });
 // Route::controller(UserController::class)->group(function(){
 //     Route::get('profile', 'profile')->name('profile');

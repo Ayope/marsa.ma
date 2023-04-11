@@ -2,12 +2,26 @@
 
 @section('content')
 
-<div class="container d-flex justify-content-center mt-3 align-items-center">
-    <div class="table-responsive" >
-        <table class="table">
+<div class="mt-2 w-100 d-flex justify-content-center">
+    @if(Session::has('success'))
+    <div class="alert alert-success">{{Session::get('success')}}</div>
+    @endif
+
+    @if(Session::has('fail'))
+    <div class="alert alert-danger">{{Session::get('fail')}}</div>
+    @endif
+</div>
+
+<div class="d-flex justify-content-center mt-3 m-auto align-items-center flex-column" style="width:95%">
+    <div class="w-75 text-end mb-3">
+        <a class="btn btn-primary px-5" href="{{route('productCreate')}}"><i class="bi bi-plus"></i>Add</a>
+    </div>
+
+    <div class="container-fluid table-responsive" >
+        <table class="table table-bordered border-dark">
                 <thead>
                     <tr>
-                        <th >Title</th>
+                        <th class="col">Title</th>
                         <th scope="col">Fish Type</th>
                         <th scope="col">Photo</th>
                         <th scope="col">Quantity</th>
@@ -19,53 +33,62 @@
                 </thead>
                 <tbody>
                     @foreach($products as $product)
-                        {{-- <tr data-href="{{ route('products.edit', $product->id) }}"> --}}
-                        <tr>
-                            <td>{{ $product->title }}</td>
-                            <td>{{ $product->fish_type }}</td>
+
+                        <tr onclick="location.href='{{ route('productEdit', $product->id) }}';" style="cursor: pointer;">
+                            <td>{{ Str::limit($product->title, 25, '...') }}</td>
+                            <td>{{ Str::limit($product->fish_type, 50, '...') }}</td>
                             <td><img src="{{asset('products-img/')}}/{{ $product->photo }}" alt="{{ $product->title }}" width="150px" height="auto"></td>
                             <td>{{ $product->quantity }}</td>
                             <td>{{ $product->price }}</td>
                             <td>{{ $product->date_of_fishing }}</td>
-                            <td>{{ Str::limit($product->description, 50, '...') }}</td>
+                            <td>{{ Str::limit($product->description, 25, '...') }}</td>
+                            {{-- should not be included in click --}}
                             <td>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $product->id }}">
-                                    <i class="fa fa-trash"></i> Delete
+                                <button data-bs-toggle="modal" data-bs-target="#confirmodal" class="mb-2 btn btn-danger rounded-pill text-white fw-bold" onclick="event.stopPropagation();" data-product-id="{{ $product->id }}">
+                                    Delete
                                 </button>
-
-                                <!-- Delete Modal -->
-                                <div class="modal fade" id="deleteModal{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $product->id }}" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteModalLabel{{ $product->id }}">Confirm Delete</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete "{{ $product->title }}"?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <i class="fa fa-trash"></i> Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </td>
                         </tr>
-                    @endforeach
+                        @endforeach
                 </tbody>
         </table>
     </div>
 </div>
 
+<div class="modal fade overflow-hidden" id="confirmodal" tabindex="-1" aria-labelledby="confirmodalabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #cfcfcf">
+                <h5 class="modal-title text-dark fw-bold" id="confirmodalabel">Confirm delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color:#fffff">
+                <strong> Are you sure to delete this product ! </strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                <form id="deleteForm" action="{{ route('product.destroy', $product->id) }} " method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">
+                        Delete
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const deleteButtons = document.querySelectorAll('[data-bs-target="#confirmodal"]');
+    const deleteForm = document.getElementById('deleteForm');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', event => {
+            const productId = event.target.dataset.productId;
+            deleteForm.action = deleteForm.action.replace(/\/\d+$/, `/${productId}`);
+        });
+    });
+</script>
 
 @endsection

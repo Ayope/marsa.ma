@@ -79,10 +79,10 @@ class AuthController extends Controller
         }
 
             if($request->role == 2 || $request->role == 3){
-                $docName = $request->file('document')->getClientOriginalName();
+                $docName = time().'.'.$request->file('document')->getClientOriginalName();
             }
 
-            $imgName = $request->file('img')->getClientOriginalName();
+            $imgName = time().'.'.$request->file('img')->getClientOriginalName();
             $request->file('img')->move(public_path('profile-img'), $imgName);
 
             $user = User::create([
@@ -131,7 +131,7 @@ class AuthController extends Controller
 
                 ]);
 
-                $photoName = $request->file('photo')->getClientOriginalName();
+                $photoName = time().'.'.$request->file('photo')->getClientOriginalName();
                 $request->file('photo')->move(public_path('vehicle-img'), $photoName);
 
                 $vehicle = Vehicle::create([

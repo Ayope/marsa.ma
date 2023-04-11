@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row justify-content-center align-items-center mt-3" style="height: 50vh;">
+    <div class="row justify-content-center align-items-center mt-3 " style="height: 50vh;">
       <div class="col-md-9 col-lg-6">
         <h2 class='text-center'>Add new product</h2>
-        <form action="{{ route('create.product') }}" method="POST" enctype="multipart/form-data" class="p-3 rounded" style="background-color: #f2f2f2;">
+        <form action="{{ route('create.product') }}" method="POST" enctype="multipart/form-data" class="p-3 my-3 rounded" style="background-color: #f2f2f2;">
           @csrf
 
           @if(Session::has('success'))
@@ -74,7 +74,11 @@
             @enderror
           </div>
 
-          <button type="submit" class="btn btn-primary mb-3 w-100">Submit</button>
+
+            <div class="w-100 d-flex justify-content-center">
+                <a href="{{route("products")}}" class="btn btn-secondary w-25 me-4">Cancel</a>
+                <button type="submit" class="btn btn-primary w-25">Submit</button>
+            </div>
         </form>
       </div>
     </div>

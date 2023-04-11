@@ -1,6 +1,7 @@
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm w-100">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                {{-- redirect to route('store') only if he had role client --}}
+                <a class="navbar-brand" href="{{ route('store') }}">
                     <img src="{{asset('images/Marsa.ma.png')}}" height="45px" alt="marsa.ma">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -9,17 +10,19 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    {{-- show it only if he had client role --}}
                     <ul class="navbar-nav ms-auto mt-1">
                         <li class="nav-item">
-                            <form class="d-flex">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" size="30">
+                            <form class="d-flex" action="{{route('search')}}" method="POST">
+                                @csrf
+                                <input class="form-control me-2" name='search' type="search" placeholder="Search" aria-label="Search" size="30">
                                 <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
                             </form>
                         </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto d-flex flex-wrap">
+                    <ul class="navbar-nav ms-auto d-flex flex-row">
                         @if(Session::get('user')->roles[0]->name == 'client')
                         <li class="nav-item me-3">
                             <a href="#" class="shopping-bag text-decoration-none">

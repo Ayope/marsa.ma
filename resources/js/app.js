@@ -1,26 +1,30 @@
 import './bootstrap';
 
-const image = document.getElementById('image');
-const imgInput = document.getElementById('imgInput')
+if (window.location.pathname === '/register') {
 
-image.addEventListener('click', function(){
-	imgInput.click()
-})
+    const image = document.getElementById('image');
+    const imgInput = document.getElementById('imgInput')
 
-// Add a change event listener to the input
-imgInput.addEventListener('change', function() {
-    // Get the selected file from the input
-    const file = imgInput.files[0];
+    image.addEventListener('click', function(){
+        imgInput.click()
+    })
 
-    // Create a new FileReader object
-    const reader = new FileReader();
+    // Add a change event listener to the input
+    imgInput.addEventListener('change', function() {
+        // Get the selected file from the input
+        const file = imgInput.files[0];
 
-    // Set the onload function of the reader
-    reader.onload = function() {
-      // Set the source of the image to the data URL
-      image.src = reader.result;
-    }
+        // Create a new FileReader object
+        const reader = new FileReader();
 
-    // Read the selected file as a data URL
-    reader.readAsDataURL(file);
-});
+        // Set the onload function of the reader
+        reader.onload = function() {
+        // Set the source of the image to the data URL
+        image.src = reader.result;
+        }
+
+        // Read the selected file as a data URL
+        reader.readAsDataURL(file);
+    });
+
+}
