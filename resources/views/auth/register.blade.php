@@ -4,12 +4,20 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+            <div class="card AuthContainer">
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                        @csrf
+                    <h1 class="text-center mb-5 fw-bold">{{ __('Register') }}</h1>
+                    <form method="POST" action="{{route('registration.user')}}" enctype="multipart/form-data">
+                    @csrf
+                        @if(Session::has('success'))
+                        <div class="alert alert-success">{{Session::get('success')}}</div>
+                        @endif
+
+                        @if(Session::has('fail'))
+                            <div class="alert alert-danger">{{Session::get('fail')}}</div>
+                        @endif
+
                     <div class="d-flex containner">
                         <div>
                             <div class="mb-3 img w-25 w-100">
@@ -17,139 +25,143 @@
                                 <input type="file" id="imgInput" name="img"  style="display: none;" class="@error('img') is-invalid @enderror"/>
 
                                 @error('img')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="w-75 w-100 inputs" >
                             <div class="row mb-3">
-                                <label for="first-name" class="col-md-4 col-form-label text-md-end">{{ __('First name') }}</label>
+                                <label for="first_name" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('First name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="first-name" type="text" class="form-control @error('first-name') is-invalid @enderror" name="first-name" value="{{ old('first-name') }}" required autocomplete="first-name" autofocus>
+                                    <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
 
-                                    @error('first-name')
+                                    @error('first_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="last-name" class="col-md-4 col-form-label text-md-end">{{ __('Last name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="last-name" type="text" class="form-control @error('last-name') is-invalid @enderror" name="last-name" value="{{ old('last-name') }}" required autocomplete="last-name" autofocus>
-
-                                @error('last-name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
+                            <div class="row mb-3">
+                                <label for="last_name" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Last name') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="phone" type="tel"
-                                pattern="(?:\+212|0)(?:\s|-)*[1-9](?:[\.\-\s]*\d{2}){4}|06(?:\s|-)*\d{2}(?:[\.\-\s]*\d{2}){3}"
-                                class="form-control @error('phone') is-invalid @enderror"
-                                name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
-                                <span><strong>Format :</strong> 06 61 23 45 67 Or +212661234567</span>
-                                @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                                <div class="col-md-6">
+                                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
 
-                        <div class="row mb-3">
-                            <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
-
-                                @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    @error('last_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
 
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                            <div class="row mb-3">
+                                <label for="phone" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Phone Number') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <div class="col-md-6">
+                                    <input id="phone" type="tel"
+                                    pattern="(?:\+212|0)(?:\s|-)*[1-9](?:[\.\-\s]*\d{2}){4}|06(?:\s|-)*\d{2}(?:[\.\-\s]*\d{2}){3}"
+                                    class="form-control @error('phone') is-invalid @enderror"
+                                    name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                                    <span class="fw-bold" >Format : 06 61 23 45 67 Or +212661234567</span>
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="address" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
+
+                                    @error('address')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="email" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Email Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="password" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Password') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            <div class="row mb-3">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Confirm Password') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="role" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Role') }}</label>
+
+                                <div class="col-md-6">
+
+                                    <select class="form-select" name="role" id="role" value="{{ old('role') }}" required>
+                                        <option value="1">Client</option>
+                                        <option value="2">Fisher</option>
+                                        <option value="3">Delivery Man</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div id="fishingLisenceInput">
+
+                            </div>
+
+                            <div id="Vehicle&DrivingLisenceInputs">
+
+                            </div>
+
+                            <div class="row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Register') }}
+                                    </button>
+
+                                    @if (Route::has('login'))
+                                        <p>Already have an account, <a class="text-decoration-none" href="{{ route('login') }}">{{ __('Login') }}</a></p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
-
-                            <div class="col-md-6">
-
-                                <select class="form-select" name="role" id="role" value="{{ old('role') }}" required>
-                                    <option value="1">Client</option>
-                                    <option value="2">Fisher</option>
-                                    <option value="3">Delivery Man</option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                        <div id="fishingLisenceInput">
-
-                        </div>
-
-                        <div id="Vehicle&DrivingLisenceInputs">
-
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                     </div>
                     </form>
                 </div>
@@ -168,7 +180,7 @@ const fisherInputs = `
     <h1>License</h1>
 
     <div class="row mb-3">
-    <label for="license_number" class="col-md-4 col-form-label text-md-end">{{ __('License Number') }}</label>
+    <label for="license_number" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('License Number') }}</label>
 
     <div class="col-md-6">
         <input id="license_number" type="text" class="form-control @error('license_number') is-invalid @enderror" name="license_number" value="{{ old('license_number') }}" required autocomplete="license_number" autofocus>
@@ -182,7 +194,7 @@ const fisherInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="expiration_date" class="col-md-4 col-form-label text-md-end">{{ __('Expiration Date') }}</label>
+    <label for="expiration_date" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Expiration Date') }}</label>
 
     <div class="col-md-6">
         <input id="expiration_date" type="date" class="form-control @error('expiration_date') is-invalid @enderror" name="expiration_date" value="{{ old('expiration_date') }}" required autocomplete="expiration_date" autofocus>
@@ -196,7 +208,7 @@ const fisherInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="issue_date" class="col-md-4 col-form-label text-md-end">{{ __('Issue Date') }}</label>
+    <label for="issue_date" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Issue Date') }}</label>
 
     <div class="col-md-6">
         <input id="issue_date" type="date" class="form-control @error('issue_date') is-invalid @enderror" name="issue_date" value="{{ old('issue_date') }}" required autocomplete="issue_date" autofocus>
@@ -210,7 +222,7 @@ const fisherInputs = `
     </div>
 
     <div class="row mb-3">
-        <label for="type" class="col-md-4 col-form-label text-md-end">{{ __('License Type') }}</label>
+        <label for="type" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('License Type') }}</label>
 
         <div class="col-md-6">
             <select id="type" class="form-select @error('type') is-invalid @enderror" name="type" required>
@@ -232,7 +244,7 @@ const fisherInputs = `
 
 
     <div class="row mb-3">
-    <label for="issuing_authority" class="col-md-4 col-form-label text-md-end">{{ __('Issuing Authority') }}</label>
+    <label for="issuing_authority" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Issuing Authority') }}</label>
 
     <div class="col-md-6">
         <textarea id="issuing_authority" type="text" class="form-control @error('issuing_authority') is-invalid @enderror" name="issuing_authority" required autocomplete="issuing_authority" autofocus>{{ old('issuing_authority') }}</textarea>
@@ -246,7 +258,7 @@ const fisherInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="document" class="col-md-4 col-form-label text-md-end">{{ __('Document') }}</label>
+    <label for="document" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Document') }}</label>
 
     <div class="col-md-6">
         <input id="document" type="file" class="form-control @error('document') is-invalid @enderror" name="document" value="{{ old('document') }}" autocomplete="document" autofocus>
@@ -260,7 +272,7 @@ const fisherInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="notes" class="col-md-4 col-form-label text-md-end">{{ __('Notes') }}</label>
+    <label for="notes" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Notes') }}</label>
 
     <div class="col-md-6">
         <textarea id="notes" class="form-control @error('notes') is-invalid @enderror" name="notes" autocomplete="notes" autofocus>{{ old('notes') }}</textarea>
@@ -277,7 +289,7 @@ const fisherInputs = `
 const DeliveryManInputs = `
 
     <div class="row mb-3">
-    <label for="max_deliveries_in_day" class="col-md-4 col-form-label text-md-end">{{ __('Max Deliveries in a Day') }}</label>
+    <label for="max_deliveries_in_day" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Max Deliveries in a Day') }}</label>
 
     <div class="col-md-6">
         <input id="max_deliveries_in_day" type="number" class="form-control @error('max_deliveries_in_day') is-invalid @enderror" name="max_deliveries_in_day" value="{{ old('max_deliveries_in_day') }}" required autocomplete="max_deliveries_in_day" autofocus>
@@ -293,7 +305,7 @@ const DeliveryManInputs = `
     <h1>License</h1>
 
     <div class="row mb-3">
-    <label for="license_number" class="col-md-4 col-form-label text-md-end">{{ __('License Number') }}</label>
+    <label for="license_number" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('License Number') }}</label>
 
     <div class="col-md-6">
         <input id="license_number" type="text" class="form-control @error('license_number') is-invalid @enderror" name="license_number" value="{{ old('license_number') }}" required autocomplete="license_number" autofocus>
@@ -307,7 +319,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="issue_date" class="col-md-4 col-form-label text-md-end">{{ __('Issue Date') }}</label>
+    <label for="issue_date" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Issue Date') }}</label>
 
     <div class="col-md-6">
         <input id="issue_date" type="date" class="form-control @error('issue_date') is-invalid @enderror" name="issue_date" value="{{ old('issue_date') }}" required autocomplete="issue_date" autofocus>
@@ -321,7 +333,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="expiration_date" class="col-md-4 col-form-label text-md-end">{{ __('Expiration Date') }}</label>
+    <label for="expiration_date" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Expiration Date') }}</label>
 
     <div class="col-md-6">
         <input id="expiration_date" type="date" class="form-control @error('expiration_date') is-invalid @enderror" name="expiration_date" value="{{ old('expiration_date') }}" required autocomplete="expiration_date" autofocus>
@@ -335,7 +347,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="issuing_place" class="col-md-4 col-form-label text-md-end">{{ __('Issuing Place') }}</label>
+    <label for="issuing_place" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Issuing Place') }}</label>
 
     <div class="col-md-6">
         <input id="issuing_place" type="text" class="form-control @error('issuing_place') is-invalid @enderror" name="issuing_place" value="{{ old('issuing_place') }}" required autocomplete="issuing_place" autofocus>
@@ -349,7 +361,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="class" class="col-md-4 col-form-label text-md-end">{{ __('Class') }}</label>
+    <label for="class" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Class') }}</label>
 
     <div class="col-md-6">
         <input id="class" type="text" class="form-control @error('class') is-invalid @enderror" name="class" value="{{ old('class') }}" required autocomplete="class" autofocus>
@@ -363,7 +375,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="document" class="col-md-4 col-form-label text-md-end">{{ __('Document') }}</label>
+    <label for="document" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Document') }}</label>
 
     <div class="col-md-6">
         <input id="document" type="file" class="form-control @error('document') is-invalid @enderror" name="document" value="{{ old('document') }}" autocomplete="document">
@@ -377,7 +389,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-    <label for="notes" class="col-md-4 col-form-label text-md-end">{{ __('Notes') }}</label>
+    <label for="notes" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Notes') }}</label>
 
     <div class="col-md-6">
         <textarea id="notes" class="form-control @error('notes') is-invalid @enderror" name="notes">{{ old('notes') }}</textarea>
@@ -393,7 +405,7 @@ const DeliveryManInputs = `
     <h1>vehicle</h1>
 
     <div class="row mb-3">
-        <label for="registration_matricule" class="col-md-4 col-form-label text-md-end">{{ __('Registration Matricule') }}</label>
+        <label for="registration_matricule" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Registration Matricule') }}</label>
 
         <div class="col-md-6">
             <input id="registration_matricule" type="text" class="form-control @error('registration_matricule') is-invalid @enderror" name="registration_matricule" value="{{ old('registration_matricule') }}" required autofocus>
@@ -407,7 +419,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-        <label for="make" class="col-md-4 col-form-label text-md-end">{{ __('Make') }}</label>
+        <label for="make" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Make') }}</label>
 
         <div class="col-md-6">
             <input id="make" type="text" class="form-control @error('make') is-invalid @enderror" name="make" value="{{ old('make') }}" required>
@@ -421,7 +433,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-        <label for="model" class="col-md-4 col-form-label text-md-end">{{ __('Model') }}</label>
+        <label for="model" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Model') }}</label>
 
         <div class="col-md-6">
             <input id="model" type="text" class="form-control @error('model') is-invalid @enderror" name="model" value="{{ old('model') }}" required>
@@ -436,7 +448,7 @@ const DeliveryManInputs = `
 
     <div class="row mb-3">
 
-        <label for="capacity" class="col-md-4 col-form-label text-md-end">{{ __('Capacity') }}</label>
+        <label for="capacity" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Capacity') }}</label>
 
         <div class="col-md-6">
             <div class="input-group">
@@ -456,7 +468,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-        <label for="photo" class="col-md-4 col-form-label text-md-end">{{ __('Photo') }}</label>
+        <label for="photo" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Photo') }}</label>
 
         <div class="col-md-6">
             <input id="photo" type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
@@ -470,7 +482,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-        <label for="type" class="col-md-4 col-form-label text-md-end">{{ __('Type') }}</label>
+        <label for="type" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Type') }}</label>
 
         <div class="col-md-6">
             <select id="type" class="form-select @error('type') is-invalid @enderror" name="type" required>
@@ -488,7 +500,7 @@ const DeliveryManInputs = `
     </div>
 
     <div class="row mb-3">
-        <label for="insurance" class="col-md-4 col-form-label text-md-end">{{ __('Insurance') }}</label>
+        <label for="insurance" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Insurance') }}</label>
 
         <div class="col-md-6">
             <input id="insurance" type="text" class="form-control @error('insurance') is-invalid @enderror" name="insurance" value="{{ old('insurance') }}" required>

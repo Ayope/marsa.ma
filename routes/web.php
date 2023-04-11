@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::view('/', 'product.store');
+
+Route::controller(AuthController::class)->group(function(){
+    Route::get('register', 'registration')->name('register');
+    // ->middleware('NowLogin');
+    Route::post('registration-user', 'registerUser')->name('registration.user');
+
+    Route::get('login', 'login')->name('login');
+    // ->middleware('NowLogin');
+    Route::post('login-user', 'loginUser')->name('login.user');
+
+    Route::post('logout', 'logout')->name('logout');
+
 });
 
-Auth::routes();
+Route::controller(ProductController::class)->group(function(){
+    Route::get('products', 'index')->name('products');
+    Route::get('store', 'E_store')->name('store');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('productCreate', 'create')->name('productCreate');
+    Route::post('product', 'store')->name('create.product');
+
+    Route::get('productEdit', 'edit')->name('productEdit');
+    Route::post('product/{id}', 'update')->name('products.edit');
+
+    Route::post('delete', 'destroy')->name('products.destroy');
+
+});
+// Route::controller(UserController::class)->group(function(){
+//     Route::get('profile', 'profile')->name('profile');
+//     Route::post('profile', 'editProfile')->name('profile');
+// });
