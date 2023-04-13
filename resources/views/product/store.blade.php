@@ -11,6 +11,15 @@
 
     <h1 id="products" class="mt-5 ms-3">Products</h1>
 
+    @if(Session::has('success'))
+        <div class="alert alert-success">{{Session::get('success')}}</div>
+    @endif
+
+    @if(Session::has('fail'))
+        <div class="alert alert-danger">{{Session::get('fail')}}</div>
+    @endif
+
+
     <div class="row g-4 row-cols-lg-5 row-cols-md-3 my-2 m-0">
 
         @foreach ($products as $product)
@@ -28,14 +37,14 @@
                             <span class="badge bg-danger">{{$product->status}}</span>
                         </div>
 
-                        <a href="shop-single.html">
+                        <a href="{{route('show', $product->title)}}">
                             <!-- img -->
                             <img src="{{asset('products-img')}}\{{$product->photo}}" height="300px" width="300px" alt="{{$product->photo}}" class="mb-3 img-fluid">
                         </a>
 
                     </div>
                     <!-- heading -->
-                    <h2 class="fs-6"><a href="shop-single.html" class="text-inherit text-decoration-none">{{Str::limit($product->title, 50, '...')}}</a></h2>
+                    <h2 class="fs-6"><a href="{{route('show', $product->title)}}" class="text-inherit text-decoration-none">{{Str::limit($product->title, 50, '...')}}</a></h2>
 
                     <div>
                     <!-- rating -->
@@ -50,14 +59,20 @@
 
                     </div>
                     <!-- price -->
-                    <h4><span class="text-dark">{{$product->price}}$/kg</span></h4>
+                    <h4><span class="text-dark">{{$product->price}} dh/kg</span></h4>
 
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <div><span class="text-dark">Quantity: {{$product->quantity}}kg</span></div>
 
                         <!-- btn -->
                         <div>
-                            <a href="#!" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg" style="font-size:10px"></i>Add</a>
+                            <form method="POST" action="{{route('commandCreate')}}">
+                                @csrf
+                                <input type="hidden" name="quantityOfProduct" value="{{$product->quantity}}">
+                                <input type="hidden" name="user_id" value="{{Session::get('user')->id}}">
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-cart me-2" style="font-size:15px"></i>Add</button>
+                            </form>
                         </div>
                     </div>
 

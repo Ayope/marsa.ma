@@ -13,12 +13,12 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function Rating(){
+    public function rating(){
         return $this->hasMany(Rating::class);
     }
 
-    public function Fisher(){
-        return $this->hasOne(Fisher::class);
+    public function user(){
+        return $this->belongsTo(User::class, 'fisher_id');
     }
 
     public function deliveryMan(){

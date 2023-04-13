@@ -16,8 +16,8 @@ class Command extends Model
         return $this->hasOne(DeliveryMan::class);
     }
 
-    public function client(){
-        return $this->hasOne(Client::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
     public function product(){

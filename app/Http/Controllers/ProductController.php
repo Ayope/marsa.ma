@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -42,8 +43,11 @@ class ProductController extends Controller
             'photo' => 'required|image|mimes:png,jpg,jpeg',
             'quantity' => 'required|integer',
             'price' => 'required|numeric',
-            'date_of_fishing' => 'required|date',
+            'date_of_fishing' => 'required|date|before:today',
             'description' => 'required|string',
+        ],
+        [
+            'date_of_fishing.before' => 'The date of fishing must be the date of today or before.'
         ]);
 
         if($validatedData){
@@ -82,9 +86,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($title)
     {
-        //
+        $product = Product::with('user')->where('title', $title)->first(); // get the ratings later
+        return view('product.storeShow', compact('product'));
     }
 
     /**
@@ -101,10 +106,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // handle size of the picture
-        if($request->file('photo')->getSize() > 2000000){
-            return back();
-        };
 
         $request->validate([
             'title' => 'required|string|max:255',

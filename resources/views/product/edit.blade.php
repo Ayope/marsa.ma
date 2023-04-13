@@ -44,7 +44,12 @@
 
           <div class="form-group mb-3">
             <label for="quantity">Quantity</label>
-            <input type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" id="quantity" value="{{ $product->quantity }}">
+            <div class="input-group">
+                <input type="number" min="1" class="form-control @error('quantity') is-invalid @enderror" name="quantity" id="quantity" value="{{ $product->quantity }}">
+                <div class="input-group-append">
+                    <span class="input-group-text rounded-0 rounded-end">KG</span>
+                </div>
+            </div>
             @error('quantity')
               <span class="invalid-feedback">{{ $message }}</span>
             @enderror
@@ -52,7 +57,12 @@
 
           <div class="form-group mb-3">
             <label for="price">Price</label>
-            <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" id="price" value="{{ $product->price }}">
+            <div class="input-group">
+                <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" id="price" value="{{ $product->price }}">
+                <div class="input-group-append">
+                    <span class="input-group-text rounded-0 rounded-end">DH</span>
+                </div>
+            </div>
             @error('price')
               <span class="invalid-feedback">{{ $message }}</span>
             @enderror

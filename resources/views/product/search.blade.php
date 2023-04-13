@@ -28,14 +28,14 @@
                                     <span class="badge bg-danger">{{$product->status}}</span>
                                 </div>
 
-                                <a href="shop-single.html">
+                                <a href="{{route('show', $product->title)}}">
                                     <!-- img -->
                                     <img src="{{asset('products-img')}}\{{$product->photo}}" height="300px" width="300px" alt="{{$product->photo}}" class="mb-3 img-fluid">
                                 </a>
 
                             </div>
                             <!-- heading -->
-                            <h2 class="fs-6"><a href="shop-single.html" class="text-inherit text-decoration-none">{{Str::limit($product->title, 50, '...')}}</a></h2>
+                            <h2 class="fs-6"><a href="{{route('show', $product->title)}}" class="text-inherit text-decoration-none">{{Str::limit($product->title, 50, '...')}}</a></h2>
 
                             <div>
                             <!-- rating -->
@@ -54,11 +54,6 @@
 
                             <div class="d-flex justify-content-between align-items-center mt-3">
                                 <div><span class="text-dark">Quantity: {{$product->quantity}}kg</span></div>
-
-                                <!-- btn -->
-                                <div>
-                                    <a href="#!" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg" style="font-size:10px"></i>Add</a>
-                                </div>
                             </div>
 
                         </div>

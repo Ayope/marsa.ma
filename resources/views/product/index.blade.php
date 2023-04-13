@@ -33,22 +33,23 @@
                 </thead>
                 <tbody>
                     @foreach($products as $product)
-
-                        <tr onclick="location.href='{{ route('productEdit', $product->id) }}';" style="cursor: pointer;">
-                            <td>{{ Str::limit($product->title, 25, '...') }}</td>
-                            <td>{{ Str::limit($product->fish_type, 50, '...') }}</td>
-                            <td><img src="{{asset('products-img/')}}/{{ $product->photo }}" alt="{{ $product->title }}" width="150px" height="auto"></td>
-                            <td>{{ $product->quantity }}</td>
-                            <td>{{ $product->price }}</td>
-                            <td>{{ $product->date_of_fishing }}</td>
-                            <td>{{ Str::limit($product->description, 25, '...') }}</td>
-                            {{-- should not be included in click --}}
-                            <td>
-                                <button data-bs-toggle="modal" data-bs-target="#confirmodal" class="mb-2 btn btn-danger rounded-pill text-white fw-bold" onclick="event.stopPropagation();" data-product-id="{{ $product->id }}">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
+                        @if($product->fisher_id == Session::get('user')->id)
+                            <tr onclick="location.href='{{ route('productEdit', $product->id) }}';" style="cursor: pointer;">
+                                <td>{{ Str::limit($product->title, 25, '...') }}</td>
+                                <td>{{ Str::limit($product->fish_type, 50, '...') }}</td>
+                                <td><img src="{{asset('products-img/')}}/{{ $product->photo }}" alt="{{ $product->title }}" width="150px" height="auto"></td>
+                                <td>{{ $product->quantity }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>{{ $product->date_of_fishing }}</td>
+                                <td>{{ Str::limit($product->description, 25, '...') }}</td>
+                                {{-- should not be included in click --}}
+                                <td>
+                                    <button data-bs-toggle="modal" data-bs-target="#confirmodal" class="mb-2 btn btn-danger rounded-pill text-white fw-bold" onclick="event.stopPropagation();" data-product-id="{{ $product->id }}">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        @endif
                         @endforeach
                 </tbody>
         </table>
@@ -67,7 +68,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                <form id="deleteForm" action="{{ route('product.destroy', $product->id) }} " method="POST">
+                <form id="deleteForm" action="{{ route('product.destroy', 0) }} " method="POST">
                     @csrf
                     <button type="submit" class="btn btn-danger">
                         Delete
