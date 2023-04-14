@@ -29,3 +29,9 @@ body{
     border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
+/* .opacity:not(#app > main > div > div.table-responsive > table > tbody > tr.table-secondary.opacity > td:nth-child(6) > a) {
+    opacity: 0.5;
+} */
+.table tbody tr .table-secondary:last-child td:not(.exclude-opacity) {
+    opacity: 1;
+}

@@ -66,8 +66,9 @@
 
                         <!-- btn -->
                         <div>
-                            <form method="POST" action="{{route('commandCreate')}}">
+                            <form method="POST" action="{{route('addToCart')}}">
                                 @csrf
+                                <input type="hidden" name="price" value="{{$product->price}}">
                                 <input type="hidden" name="quantityOfProduct" value="{{$product->quantity}}">
                                 <input type="hidden" name="user_id" value="{{Session::get('user')->id}}">
                                 <input type="hidden" name="product_id" value="{{$product->id}}">

@@ -26,7 +26,7 @@ class Product extends Model
     }
 
     public function command(){
-        return $this->hasOneMany(Command::class,'product_commands');
+        return $this->belongsToMany(Command::class,'product_commands');
     }
 
     protected $fillable = [
@@ -43,6 +43,5 @@ class Product extends Model
 
     protected $hidden = [
         'fisher_id',
-        'quantity'
     ];
 }

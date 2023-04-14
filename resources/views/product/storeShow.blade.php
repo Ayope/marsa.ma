@@ -25,7 +25,7 @@
 
             <h1 class="mb-3">{{$product->title}}</h1>
 
-            <p>Added by <img src="{{asset('profile-img')}}/{{$product->user->photo}}" height="30px" class="rounded-circle"> {{$product->user->first_name}} {{$product->user->last_name}}</p>
+            <p>Added by <img src="{{asset('profile-img')}}/{{$product->user->photo}}" height="30px" width="31px" class="rounded-circle"> {{$product->user->first_name}} {{$product->user->last_name}}</p>
 
             <p class="lead mb-4">{{$product->description}}</p>
 
@@ -33,7 +33,7 @@
 
             <p>Quantity available: {{$product->quantity}}kg</p>
 
-            <form method="POST" action="{{route('commandCreate')}}">
+            <form method="POST" action="{{route('addToCart')}}">
                 @csrf
                 <div class="form-group">
                     <label for="quantity">Quantity:</label>
@@ -44,7 +44,8 @@
                         </div>
                     </div>
                 </div>
-
+                
+                <input type="hidden" name="price" value="{{$product->price}}">
                 <input type="hidden" name="quantityOfProduct" value="{{$product->quantity}}">
                 <input type="hidden" name="user_id" value="{{Session::get('user')->id}}">
                 <input type="hidden" name="product_id" value="{{$product->id}}">

@@ -154,6 +154,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        /* if user delete do soft delete by just turn it the status
+        of the product to unavailable*/
+
         $product = Product::find($id);
 
         $path = public_path('products-img/'. $product->photo);

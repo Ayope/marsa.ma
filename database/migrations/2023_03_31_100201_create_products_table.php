@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('fish_type');
             $table->string('photo');
             $table->integer('quantity');
-            $table->integer('price');
+            $table->float('price');
             $table->date('date_of_fishing');
             $table->text('description');
-            $table->string('status')->nullable();  // (available - sold out (archive))
+            $table->enum('status', ['available', 'archived', 'sold out', 'rejected'])->default('available')->nullable();  // (available - sold out (archive))
             $table->unsignedBigInteger('fisher_id');
             $table->foreign('fisher_id')->references('id')->on('users');
             $table->timestamps();

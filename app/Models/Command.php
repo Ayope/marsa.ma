@@ -21,14 +21,16 @@ class Command extends Model
     }
 
     public function product(){
-        return $this->hasOneMany(Product::class, 'product_commands');
+        return $this->belongsToMany(Product::class, 'product_commands');
     }
+
+
 
     protected $fillable = [
         'delivery_man_id',
         'client_id',
         'status',
-        'payment_method'
+        'payment_method',
     ];
 
     protected $hidden = [

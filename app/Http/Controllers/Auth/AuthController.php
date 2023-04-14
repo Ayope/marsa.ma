@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-
 use App\Models\User;
+
 use App\Models\Vehicle;
 use App\Models\DeliveryMan;
 use Illuminate\Http\Request;
 use App\Models\DrivingLisense;
+use App\Models\ProductCommand;
 use App\Models\FishingLiscence;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -179,6 +180,15 @@ class AuthController extends Controller
         if(Hash::check($request->password, $user->password)){
                 $request->session()->put('loginUser', $user->id);
                 $request->session()->put('role', $user->roles->pluck('name')[0]);
+
+                $userId = $user->id;
+
+                $productNum = ProductCommand::with('command')
+                                ->whereHas('command', function($query) use ($userId) {
+                                    $query->where('client_id', $userId);
+                                })->count();
+
+                $request->session()->put('productNum', $productNum);
 
                 if($user->hasRole('client')){
                     $request->session()->put('user', $user);

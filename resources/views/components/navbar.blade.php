@@ -25,15 +25,11 @@
             <ul class="navbar-nav ms-auto d-flex flex-row">
                 @if(Session::get('user')->roles[0]->name == 'client')
                 <li class="nav-item me-3">
-                    <a href="#" class="shopping-bag text-decoration-none">
+                    <a href="{{route('showCart',  ['user_id' => Session::get('user')->id])}}" class="text-decoration-none">
                         <span class="fa-layers fa-fw">
                             <i class="bi bi-cart" style="font-size: 33px; color:black;"></i>
                             <span class="badge rounded-pill badge-notification bg-success">
-                                @if(Session::has('productNum'))
-                                    {{Session::get('productNum')}}
-                                @else
-                                    0
-                                @endif
+                                {{ $productCount = app('App\Http\Controllers\CommandController')->CartCount(Session::get('user')->id)}}
                             </span>
                         </span>
                     </a>

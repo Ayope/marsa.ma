@@ -10,29 +10,36 @@ use App\Http\Requests\UpdateCommandRequest;
 
 class CommandController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
 
+    public function showCart($user_id)
+    {
+        $command = Command::with(['product' => function($query){
+            $query->withPivot('quantity');
+        }])->where('client_id', $user_id)->get();
+
+        $products = [];
+
+        foreach ($command as $c) {
+            $products = array_merge($products, $c->product->toArray());
+        }
+        // need to get quantity also
+        return view('commande.cart', compact('products', 'command'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function confirmCommand()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function addToCart(Request $request)
     {
         // replace all of that with ajax
-        $command = Command::where('client_id', $request->user_id)->latest('created_at')->first();
+
+        $command = Command::where('client_id', $request->user_id)->first();
+        // and where status not equal confirmed or others ...(if status equal confirmed he can create new command)
 
         if(!$command){
             $command = Command::create([
@@ -40,7 +47,7 @@ class CommandController extends Controller
             ]);
         }
 
-        // the informations get filled when the user confirm the commande
+        // the command's informations get filled when the user confirm the commande
 
         $CartProduct = ProductCommand::where('product_id', $request->product_id)
                                         ->where('command_id', $command->id)
@@ -51,7 +58,8 @@ class CommandController extends Controller
                 $CartProduct = ProductCommand::create([
                     'command_id' => $command->id,
                     'product_id' => $request->product_id,
-                    'quantity' => $request->quantity ?? 1, // later check quantity (should be less than the product quantity)
+                    'quantity' => $request->quantity ?? 1,
+                    'price' => $request->price
                 ]);
 
                 if($CartProduct){
@@ -60,6 +68,7 @@ class CommandController extends Controller
 
                     return back()->with('success', 'Product added successfully');
                 }
+
                 // the user also can update the quantity of the product in the cart page
 
                 /* subtract the quantity from the quantity of the product in the products table
@@ -81,17 +90,19 @@ class CommandController extends Controller
         }else{
             return back()->with('fail', 'Product already exist in the cart');
         }
-
-
-
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Command $command)
+    public function CartCount($user_id)
     {
-        //
+        $productNum = ProductCommand::with('command')
+            ->whereHas('command', function($query) use ($user_id) {
+                $query->where('client_id', $user_id);
+            })->count();
+
+        return $productNum;
     }
 
     /**
@@ -105,16 +116,42 @@ class CommandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCommandRequest $request, Command $command)
+    public function updateQuantityPrice(Request $request)
     {
-        //
+        // validate the data first
+
+        $quantity = $request->quantity;
+        $productId = $request->productId;
+        $userId = $request->userId;
+
+        $product = ProductCommand::where('product_id', $productId)
+                ->whereHas('command', function($query) use ($userId) {
+                    $query->where('client_id', $userId);
+                });
+
+        $product->update([
+            'quantity' => $quantity,
+        ]);
+
+        return response()->json([
+            'quantity' => $quantity,
+        ])->header('Content-Type', 'application/json');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Command $command)
+    public function deleteProductFromCart(Request $request)
     {
-        //
+        $user_id = $request->user_id;
+        $product = ProductCommand::where('product_id', $request->product_id)
+                ->whereHas('command', function($query) use ($user_id) {
+                    $query->where('client_id', $user_id);
+                });
+
+        if($product->delete()){
+            return back()->with('success', 'deleted successfully');
+        }
     }
 }

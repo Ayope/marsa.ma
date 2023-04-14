@@ -47,7 +47,10 @@ Route::controller(ProductController::class)->group(function(){
 });
 
 Route::controller(CommandController::class)->group(function(){
-    Route::post('commandCreate', 'store')->name('commandCreate');
+    Route::post('addToCart', 'addToCart')->name('addToCart');
+    Route::get('showCart/{user_id}', 'showCart')->name('showCart');
+    Route::post('deleteFromCart', 'deleteProductFromCart')->name('deleteFromCart');
+    Route::post('updateQuantityPrice', 'updateQuantityPrice')->name('updateQuantityPrice');
 });
 
 // Route::controller(UserController::class)->group(function(){
