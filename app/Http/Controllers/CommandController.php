@@ -108,9 +108,9 @@ class CommandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Command $command)
+    public function checkout()
     {
-        //
+        return view('commande.checkout');
     }
 
     /**

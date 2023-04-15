@@ -23,7 +23,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 @foreach ($products as $product)
                 {{-- user can click the row to go see the product --}}
                     @if($product['status'] == 'available'){{-- check the status  instead --}}
@@ -63,7 +62,7 @@
                                     </div>
                                 </td>
                                 {{-- change the price --}}
-                                <td> <span style="opacity: 0.5"></span> <span style="opacity: 0.5">DH</span> </td>
+                                <td> <span style="opacity: 0.5"></span> <span style="opacity: 0.5">{{ $product['price'] * $product['pivot']['quantity']}}DH</span> </td>
                             <td>
                                 <form action="{{route('deleteFromCart')}}" method="POST">
                                     @csrf
@@ -74,18 +73,22 @@
                             </td>
                         </tr>
                     @endif
-
-                    @php
-
-                    @endphp
                 @endforeach
             </tbody>
         </table>
     </div>
 
+    @if(!$products)
+        <div class="text-center mb-3">
+            <p class="m-0"><i class="bi bi-cart-x-fill" style="font-size: 120px"></i></p>
+            <p>Your cart is empty for the moment</p>
+            <a href="{{route('store')}}" class="text-decoration-none btn btn-primary">See the latest products</a>
+        </div>
+    @endif
+
     <div class="text-right mt-3 ms-3">
-        <p><strong>Total:</strong> <span id="total"> </span> DH</p>
-        <a href="#" class="btn btn-primary">Checkout</a>
+        <p><strong>Total:</strong> <span id="total"> </span></p>
+        <a href="{{route('checkout')}}" class="btn btn-primary">Checkout</a>
     </div>
 </div>
 
@@ -106,7 +109,7 @@
 
             totalOfAll = totalOfAll + totalPriceForProduct
 
-            totalOfAllDiv.innerText = totalOfAll;
+            totalOfAllDiv.innerText = totalOfAll + ' DH';
         });
     });
 
@@ -128,7 +131,7 @@
 
                 totalOfAll = (totalOfAll - currentTotalPrice) + newPrice;
 
-                totalOfAllDiv.innerText = totalOfAll;
+                totalOfAllDiv.innerText = totalOfAll + ' DH';
 
                 fetch('{{ route('updateQuantityPrice') }}', {
                     method: 'POST',
@@ -145,7 +148,6 @@
                 .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => console.log(error));
-
             }
         }
 

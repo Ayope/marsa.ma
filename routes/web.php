@@ -51,6 +51,7 @@ Route::controller(CommandController::class)->group(function(){
     Route::get('showCart/{user_id}', 'showCart')->name('showCart');
     Route::post('deleteFromCart', 'deleteProductFromCart')->name('deleteFromCart');
     Route::post('updateQuantityPrice', 'updateQuantityPrice')->name('updateQuantityPrice');
+    Route::get('checkout', 'checkout')->name('checkout');
 });
 
 // Route::controller(UserController::class)->group(function(){
