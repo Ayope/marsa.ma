@@ -84,12 +84,20 @@
             <p>Your cart is empty for the moment</p>
             <a href="{{route('store')}}" class="text-decoration-none btn btn-primary">See the latest products</a>
         </div>
+
+        <div class="text-right mt-3 ms-3">
+            <p><strong>Total:</strong> <span id="total"> </span></p>
+            <a href="{{route('checkout')}}" class="btn btn-primary disabled">Checkout</a>
+        </div>
     @endif
 
-    <div class="text-right mt-3 ms-3">
-        <p><strong>Total:</strong> <span id="total"> </span></p>
-        <a href="{{route('checkout')}}" class="btn btn-primary">Checkout</a>
-    </div>
+    @if($products)
+        <div class="text-right mt-3 ms-3">
+            <p><strong>Total:</strong> <span id="total"> </span></p>
+            <a href="{{route('checkout', Session::get('user')->id)}}" class="btn btn-primary">Checkout</a>
+        </div>
+    @endif
+
 </div>
 
 <script>

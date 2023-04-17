@@ -183,13 +183,6 @@ class AuthController extends Controller
 
                 $userId = $user->id;
 
-                $productNum = ProductCommand::with('command')
-                                ->whereHas('command', function($query) use ($userId) {
-                                    $query->where('client_id', $userId);
-                                })->count();
-
-                $request->session()->put('productNum', $productNum);
-
                 if($user->hasRole('client')){
                     $request->session()->put('user', $user);
                     return redirect('/store');

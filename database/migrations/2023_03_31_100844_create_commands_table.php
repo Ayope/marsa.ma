@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id')->nullable();
             $table->foreign('client_id')->references('id')->on('users');
             $table->enum('status', ['canceled' ,'confirmed', 'pending',  'processing', 'delivered'])->nullable();
-            $table->enum('payment_method', ['cash on delivery', 'online'])->nullable();
+            $table->enum('payment_method', ['offline', 'online'])->nullable();
             $table->timestamps();
         });
     }

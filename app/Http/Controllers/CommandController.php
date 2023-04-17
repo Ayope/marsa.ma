@@ -22,8 +22,8 @@ class CommandController extends Controller
         foreach ($command as $c) {
             $products = array_merge($products, $c->product->toArray());
         }
-        // need to get quantity also
-        return view('commande.cart', compact('products', 'command'));
+
+        return view('commande.cart', compact('products'));
     }
 
     /**
@@ -63,9 +63,6 @@ class CommandController extends Controller
                 ]);
 
                 if($CartProduct){
-                    $productNum = ProductCommand::where('command_id', $command->id)->count();
-                    $request->session()->put('productNum', $productNum);
-
                     return back()->with('success', 'Product added successfully');
                 }
 
@@ -108,9 +105,19 @@ class CommandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function checkout()
+    public function checkout($user_id)
     {
-        return view('commande.checkout');
+        $command = Command::with(['product' => function($query){
+            $query->withPivot('quantity');
+        }])->where('client_id', $user_id)->get();
+
+        $products = [];
+
+        foreach ($command as $c) {
+            $products = array_merge($products, $c->product->toArray());
+        }
+
+        return view('commande.checkout', compact('products'));
     }
 
     /**

@@ -2,131 +2,103 @@
 
 → Marsa.ma
 
-## Users of the application:
+## What is it ?
+Marsa.ma is an online platform that aims to facilitate the process of finding high-quality fish and provides an opportunity for fishermen to grow their businesses. The application serves as a digital marketplace for fishermen to sell all types of fish, allowing customers to easily access and purchase their favorite fresh fish. Additionally, with a dedicated delivery service, Marsa.ma ensures that customers receive fresh, high-quality fish from local fishermen while also supporting the growth of their business.
 
-→ Admin - fisheman [employee - freelance] - delivery man [employee - freelance] - Clients
+## Roles of the application:
+
+→ Admin - Fisher - Delivery man - Customers
+
+## Screenshots
 
 ## Application features:
-> 1.management of a fishport and resources\
-> 2.Rating system for delivery guys and freelance fishers\
-> 3.Marketplace\
-> 4.Job search\
-> 5.Chat live (bonus)
+> 1.Marketplace  
+> 2.Rating for products  
+> 3.Job search  
+
+# User stories:
+
+## As User I can:
+1- Create profile and choose my role in the application  
+2- Connect to the application using my informations  
+3- Update profile informations  
+4- Reset password  
 
 ## As Admin I can :
-1- Manage fishes [exports and imports] (both fished by the employees and by freelance fishers)
-> I- A list of collaborators [Add {you can check it in the map of morocco} / Delete collaboraor]\
-> II- A list of warehouses to stock fishes [Add / Delete / Update warhouse]
+1- Manage Users profiles :
+> I- A list of Users of application  
+> II- Block profiles
 
-2- Manage fishers [Each fisher have an id] :
-> I- A list of freelance fishers [Accept / Delete account]\
-(freelance fisher create account and wait for the administration to accept him → When accepted send email)\
-> II - A list of employee fishers [Create / Delete account]
+2- Manage vehicles [Each vehicle have matricules and a name] :
+> I- A list of delivery men vehicles  
+> II- block vehicles
 
+3- Manage marketplace
+> I- A list of the products in the marketplace  
+> II- Delete any unwanted products
 
-3- Manage boats [Each baot have an id and a type] :
-> I- A list of freelance fishers boats (small boats) [Accept/Delete]\
-> II - A list of fishport boats (the ones used by employees) [Create/Update/Delete]
-
-4- Manage delivery guys
-> I- A list of employee delivery guys [Add / Delete account]\
-> II - A list of freelance delivery guys that associated to the freelance fishers
-
-5- Manage vehicles [Each vehicle have matricules and a name] :
-> I- A list of freelance delivery guys vehicles [Accept/Delete]\
-> II - A list of fishport vehicles (the ones used by employees) [Create/Update/Delete]
-
-6- Manage marketplace
-> I- Check for the products in the marketplace [Delete any unwanted products]
-
-7- Manage fishing trips:
-> I- A list of fishing trips [Add / Update / Delete fishing trip] for employee\
-> II - Accept fishing trips time for freelance fishers [Accept / Delete]
-
+4- Manage ratings:
+> I- A list of all ratings  
+> II- Delete rating
 
 ## As fisher I can:
-1- Create account and wait for administration acceptance *(freelance fishers only)*
+1- Manage my products:
+> I- A list of all my products  
+> II- Add new products  
+> III- Update my product  
+> IV- Delete my product
 
-2- Sell in the Marketplace in the platform to the Clients or to Other fishers [Add / Delete / Update product] *(freelance fishers only)*
-> I- Sell fishes to clients\
-> II - Buy or Sell Boats and fishing equipements (fishing boats, fishing materiales)
+2- Manage commandes:
+> I- A list of all the commandes with their status (canceled - pending - confirmed - delivered)
 
-3- Display:
-> I- profile page\
-> II - display Informations about him *both* and his boats *(freelance fishers only)*\
-> III- dashboard for statistique : *(freelance fishers only)*
->> 1.imports\
->> 2.buyed fishes and fishing products\
->> 3.market information (access market information such as price and products trends and demand)\
->> 4.average of reviews
+3- Manage delivery men
+> I- Add delivery men directly from the application to my team  
+> II- Remove delivery men from my team
 
-> IV- the weather condition *both* for the fishport sea to help fisher plan his fishing trip *(freelance fishers only)*\
-> V- A list of his schedule fishing trips\
-> VI- Regulatory compliance\
-> VII- Clients reviews *(freelance fishers only)*
+## As delivery man I can:
 
-4- Have a list of delivery guys that he works with *(freelance fishers only)*
-> I- Fishers can make contract with the delivery guys to hire them [Add/Delete delivery guys]
-
-5- Schedule his time to go out to fish [Add / Delete / Update schedule]
-> Must wait for administration acceptance *(freelance fishers only)*
-
-6- Can add Jobs for freelancer delivery guys [Add / Delete / Update]
-
-## As delivery guy I can:
-
-1- Have profile page *both* [Create *(freelance delivery guys only)* / Update/ Delete account *both* ]
-
-2- Apply for Job : *(freelance delivery guys only)*
-> I- As a freelance fisher delivery guy
-
-3- Display:
-> I- A list of jobs available with freelance fishers (before got applied in a job) *(freelance delivery guys only)*\
-> II- A list of Tasks of delivering to clients
+1- Manage commandes:
+> I- A list of all the commandes with their status (canceled - pending - confirmed - delivered)  
+> II- Confirm the commande after delivering it
 
 ## As client I can:
 
-1- Have profile page [Create / Update/ Delete account]
+1- Manage ratings:
+> I- Add rating  
+> II- modify rating  
+> II- Delete rating
 
-2- Display:
-> I- Marketplace [An e-commerce website structure]
-
-3- Buy fish or fish equipement and choose to pay in cash on delivery or Online
-
-4- Rate delivery guy and the freelance fisher after got my fish
+2- Manage commande:
+> I- A list of my commandes  
+> II- Create a new commande  
+> III- Confirm a commande  
+> IV- Cancel a commande
 
 ## Bonus:
 
-1- Live auction using chat:
-> I- All clients have a notification or email or a post of a box of fishes with specific infos as the amount of fishes and the time of start and end so clients can 	enter the chat and bid on it
+### As Admin I can :
+- Manage job offers   
+> I- A list of all job offers  
+> II- Delete job offers  
 
-2- Technicien role: [freelancer and employee]
-> I- technicien have also a profile in application [Create (wait to be accepted)/ Update / Delete]\
-> II- Display:
->> 1.A list of tasks to do (requests from free fishers or Admin to fix boats)
+### As fisher I can :
+- Manage my job offers   
+> I- A list of my job offers  
+> II- Add new job offer  
+> III- Update my job offer  
+> IV- Delete my job offer
 
-3- Port security management (by Admin)
-> I- hire security\
-> II- security update (e.g: add surveillance cameras)\
-> III- contact security administration on a chat system (send requests)
+- Manage candidatures
+> I- A list of all the candidatures  
+> II- Accept a candidature  
+> III- Reject a candidature  
 
-4- Security role:
-> I- Security have also a profile in application [Created by administration/ Update / Delete]\
-> II- Display:
->> 1.A list of tasks to do
-
-> III- Can get requests from admin
-
-5- Admin have:
-> I- A list of equipment to help involve the infrastracture of port\
-> II- A list of plans to help involve the infrastracture of port
-
-6- Super Admin account 
-> I- Have all website administrator privileges\
-> II- Can also manage website administrators
-
-7- Client can subscribe with a freelance fisher to get an amount and a type of fish weekly or monthly
+### As delivery man I can:
+- Manage my candidatures:  
+> I- add new candidature to a job offer  
 
 ## Tools:
+JIRA | FIGMA | UML | MERISE [MLD]   
+GIT | GITHUB  
+HTML | CSS [bootstrap] | JavaScript | Laravel [PHP] | SQL
 
-JIRA | FIGMA | LUCIDCHART | GIT | GITHUB | HTML | CSS [bootstrap/ Tailwind] | JavaScript [or Vue.js] | PHP [or Laravel] | SQL | UML | MERISE [MLD]
