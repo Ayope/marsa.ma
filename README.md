@@ -1,3 +1,17 @@
+<h3>Steps to clone the project and Lunch it:</h3>
+<ul>
+     <li> clone the Repository</li>
+     <li> Go to Terminal and run this commands:
+     <li> composer install
+     <li> npm install
+     <li> cp .env.example .env
+     <li> php artisan key:generate
+     <li> php artisan migrate 
+     <li> php artisan db:seed 
+     <li> php artisan serve 
+     <li> npm run dev 
+</ul> 
+
 ## Application Name :
 
 → Marsa.ma
