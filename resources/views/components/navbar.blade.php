@@ -44,9 +44,9 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        {{-- <a class="dropdown-item" href="{{route('profile')}}">
-                            {{ __('Profile Settings') }}
-                        </a> --}}
+                        <a class="dropdown-item" href="{{route('commandes', Session::get('user')->id)}}">
+                            {{ __('Orders') }}
+                        </a>
 
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();

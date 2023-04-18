@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="container d-flex flex-column w-100 justify-content-center my-3 containerOfAll">
-        <form action="" method="POST">
+        <form action="{{route('confirm')}}" method="POST">
+            @csrf
             <div class="card mb-3">
                 <div class="d-flex justify-content-between card-header bg-success text-white">
                     <h5 class="mb-0">Address</h5>
@@ -26,7 +27,7 @@
                 </div>
                 <div class="card-body">
                     {{-- turn this to english --}}
-                    <p class="card-text">Home delivery
+                    <p class="card-text">delivered to your addresss
                         <br> <span class="text-secondary">Our team gonna call you for confirmation</span>
                     </p>
                     <div class="d-flex flex-wrap justify-content-center">
@@ -36,12 +37,19 @@
                                 src="{{asset('products-img')}}/{{$product['photo']}}"
                                 alt="product image">
                             <p class="card-text mb-0">{{$product['title']}}</p>
+                            <p class="card-text text-muted mb-0">Price: {{$product['price'] * $product['pivot']['quantity']}} DH</p>
                             <p class="card-text text-muted small">QTT: {{$product['pivot']['quantity']}}</p>
                         </div>
                         @php
                             $total += $product['price'] * $product['pivot']['quantity']
                         @endphp
                         @endforeach
+                        @if (!$products)
+                            <div class="d-flex flex-column align-items-center justify-content-center">
+                                <h4 class="mb-3">No products here yet</h4>
+                                <a href="{{route('store')}}" class="btn btn-success"><i class="bi bi-cart"></i> Continue shopping</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -56,9 +64,10 @@
                 <div class="card-body d-flex justify-content-between align-items-center py-2" id="card-body-content">
                   <div class="d-flex align-items-center">
                     <div>
-                      <span class="d-block font-weight-bold">Payment by cash</span>
-                      <input type="hidden" value="offline">
-                      <span class="d-block text-muted">Pay in cash as soon as you receive your order</span>
+                        <input type="hidden" value="offline" name="PaymentMethod">
+                        <input type='hidden' value='{{Session::get('user')->id}}' name="user_id">
+                        <span class="d-block font-weight-bold">Payment by cash</span>
+                        <span class="d-block text-muted">Pay in cash as soon as you receive your order</span>
                     </div>
                   </div>
                 </div>
@@ -71,9 +80,15 @@
                 <hr>
                 <p><strong> Total:</strong> <span>{{$total + 25}}</span> DH</p>
 
-                <button type="submit" class="btn btn-success">
-                    Confirm commande
-                </button>
+                @if($products)
+                    <button type="submit" class="btn btn-success">
+                        Confirm commande
+                    </button>
+                @else
+                    <button type="submit" class="btn btn-success" disabled>
+                        Confirm commande
+                    </button>
+                @endif
             </div>
         </form>
     </div>
@@ -134,15 +149,79 @@ modifyLink.addEventListener('click', function(event) {
 
     if(selectedOption.value == 'offline'){
         description = 'Pay in cash as soon as you receive your order.'
+        newContent.innerHTML = `
+            <span class="d-block font-weight-bold">${selectedOption.text}</span>
+            <input type='hidden' value='${selectedOption.value}' name="PaymentMethod">
+            <input type='hidden' value='{{Session::get('user')->id}}' name="user_id">
+            <span class="d-block text-muted">${description}</span>
+        `;
     } else {
         description = 'Easy, secure, and helps avoid any contact with coins or bills.'
+        newContent.innerHTML = `
+            <span class="d-block font-weight-bold">${selectedOption.text}</span>
+            <input type='hidden' value='${selectedOption.value}' name="PaymentMethod">
+            <input type='hidden' value='{{Session::get('user')->id}}' name="user_id">
+            <span class="d-block text-muted">${description}</span>
+
+            <div>
+                <div class="form-group row my-3">
+                    <label for="card_number" class="col-md-4 col-form-label text-md-right">{{ __('Card Number') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="card_number" type="text" class="form-control @error('card_number') is-invalid @enderror" name="card_number" value="{{ old('card_number') }}" required autocomplete="card_number" autofocus>
+
+                        @error('card_number')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <label for="security_code" class="col-md-4 col-form-label text-md-right">{{ __('Security Code') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="security_code" type="text" class="form-control @error('security_code') is-invalid @enderror" name="security_code" value="{{ old('security_code') }}" required autocomplete="security_code">
+
+                        @error('security_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <label for="expiration_month" class="col-md-4 col-form-label text-md-right">{{ __('Expiration Month') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="expiration_month" type="number" class="form-control @error('expiration_month') is-invalid @enderror" name="expiration_month" value="{{ old('expiration_month') }}" required autocomplete="expiration_month" min="1" max="12">
+
+                        @error('expiration_month')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <label for="expiration_year" class="col-md-4 col-form-label text-md-right">{{ __('Expiration Year') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="expiration_year" type="number" class="form-control @error('expiration_year') is-invalid @enderror" name="expiration_year" value="{{ old('expiration_year') }}" required autocomplete="expiration_year" min="{{ date('Y') }}" max="{{ date('Y') + 10 }}">
+
+                        @error('expiration_year')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+            </div>`;
     }
 
-    newContent.innerHTML = `
-    <span class="d-block font-weight-bold">${selectedOption.text}</span>
-    <input type='hidden' value='${selectedOption.value}'>
-    <span class="d-block text-muted">${description}</span>
-    `;
 
     cardBodyContent.innerHTML = '';
 

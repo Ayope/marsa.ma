@@ -18,8 +18,8 @@ class CommandFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => $this->faker->randomElement(['canceled' ,'confirmed', 'pending',  'processing', 'delivered']),
-            'payment_method' => $this->faker->randomElement(['cash on delivery', 'online']),
+            'status' => $this->faker->randomElement(['canceled' ,'confirmed', 'delivering', 'delivered']),
+            'payment_method' => $this->faker->randomElement(['offline', 'online']),
             'delivery_man_id' => $this->faker->numberBetween(User::min('id'),User::max('id')), // where role is delivery man
             'client_id' => $this->faker->numberBetween(User::min('id'),User::max('id')) // where role is client
         ];

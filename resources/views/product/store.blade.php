@@ -84,6 +84,10 @@
         @endforeach
     </div>
 
+    @if(Session::has('loginUser'))
+        @include('components.footer')
+    @endif
+
 <style>
     .hero-image {
         background-image: url('/images/pexels-photo-6313467.jpeg');

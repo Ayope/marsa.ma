@@ -87,7 +87,7 @@
 
         <div class="text-right mt-3 ms-3">
             <p><strong>Total:</strong> <span id="total"> </span></p>
-            <a href="{{route('checkout')}}" class="btn btn-primary disabled">Checkout</a>
+            <a href="{{route('checkout', Session::get('user')->id)}}" class="btn btn-primary disabled">Checkout</a>
         </div>
     @endif
 

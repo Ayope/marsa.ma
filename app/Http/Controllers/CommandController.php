@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Command;
+use App\Models\Product;
+use App\Models\PaymentInfo;
 use Illuminate\Http\Request;
 use App\Models\ProductCommand;
-use App\Http\Requests\StoreCommandRequest;
-use App\Http\Requests\UpdateCommandRequest;
 
 class CommandController extends Controller
 {
@@ -15,7 +15,9 @@ class CommandController extends Controller
     {
         $command = Command::with(['product' => function($query){
             $query->withPivot('quantity');
-        }])->where('client_id', $user_id)->get();
+        }])->where('client_id', $user_id)
+            ->where('status', NULL)
+            ->get();
 
         $products = [];
 
@@ -26,28 +28,19 @@ class CommandController extends Controller
         return view('commande.cart', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function confirmCommand()
-    {
-        //
-    }
-
     public function addToCart(Request $request)
     {
-        // replace all of that with ajax
+        // add ajax
 
-        $command = Command::where('client_id', $request->user_id)->first();
-        // and where status not equal confirmed or others ...(if status equal confirmed he can create new command)
+        $command = Command::where('client_id', $request->user_id)
+                            ->where('status', NULL)
+                            ->first();
 
         if(!$command){
             $command = Command::create([
                 'client_id' => $request->user_id
             ]);
         }
-
-        // the command's informations get filled when the user confirm the commande
 
         $CartProduct = ProductCommand::where('product_id', $request->product_id)
                                         ->where('command_id', $command->id)
@@ -66,67 +59,17 @@ class CommandController extends Controller
                     return back()->with('success', 'Product added successfully');
                 }
 
-                // the user also can update the quantity of the product in the cart page
-
-                /* subtract the quantity from the quantity of the product in the products table
-                if the user confirm command and add it again if he cancel the command */
             }else{
                 return back()->with('fail', 'Product quantity is higher than available');
             }
-
-                /*
-                solve the session problem cause the user in another platform won't see
-                how many products is in the cart (cause the number is stored in a session)
-                instead find a way to pass it when you retrieve the data exist in the
-                productCommand table to show it in the cart page
-                */
-
-                // find a way to update it once something is happened in the productCommand table
-
 
         }else{
             return back()->with('fail', 'Product already exist in the cart');
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function CartCount($user_id)
-    {
-        $productNum = ProductCommand::with('command')
-            ->whereHas('command', function($query) use ($user_id) {
-                $query->where('client_id', $user_id);
-            })->count();
-
-        return $productNum;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function checkout($user_id)
-    {
-        $command = Command::with(['product' => function($query){
-            $query->withPivot('quantity');
-        }])->where('client_id', $user_id)->get();
-
-        $products = [];
-
-        foreach ($command as $c) {
-            $products = array_merge($products, $c->product->toArray());
-        }
-
-        return view('commande.checkout', compact('products'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function updateQuantityPrice(Request $request)
     {
-        // validate the data first
-
         $quantity = $request->quantity;
         $productId = $request->productId;
         $userId = $request->userId;
@@ -139,16 +82,8 @@ class CommandController extends Controller
         $product->update([
             'quantity' => $quantity,
         ]);
-
-        return response()->json([
-            'quantity' => $quantity,
-        ])->header('Content-Type', 'application/json');
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function deleteProductFromCart(Request $request)
     {
         $user_id = $request->user_id;
@@ -161,4 +96,148 @@ class CommandController extends Controller
             return back()->with('success', 'deleted successfully');
         }
     }
+
+    public function checkout($user_id)
+    {
+        $command = Command::with(['product' => function($query){
+            $query->withPivot('quantity');
+        }])->where('client_id', $user_id)
+            ->where('status', NULL)
+            ->get();
+
+        $products = [];
+
+        foreach ($command as $c) {
+            $products = array_merge($products, $c->product->toArray());
+        }
+
+        return view('commande.checkout', compact('products'));
+    }
+
+    public function CartCount($user_id)
+    {
+        $productNum = ProductCommand::with('command')
+            ->whereHas('command', function($query) use ($user_id) {
+                $query->where('client_id', $user_id)
+                    ->where('status', NULL);
+            })->count();
+
+        return $productNum;
+    }
+
+
+    public function showCommands($user_id){
+
+        $command = Command::with(['product' => function($query){
+            $query->withPivot('quantity');
+        }])->where('client_id', $user_id)
+            ->where('status', '!=', NULL)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $products = [];
+
+        foreach ($command as $c) {
+            $products = array_merge($products, $c->product->toArray());
+        }
+
+        return view('commande.yourCommandes', compact('products', 'command'));
+    }
+
+
+    public function cancelCommand($user_id, $command_id){
+
+        $command = Command::with(['product' => function($query){
+            $query->withPivot('quantity');
+            }])->where('id', $command_id)
+            ->where('client_id', $user_id)
+            ->where('status', '!=', NULL)
+            ->where('status', '!=', 'canceled')
+            ->get();
+
+        $updateStatus = $command[0]->update([
+            'status' => 'canceled'
+        ]);
+
+        if($updateStatus){
+            foreach ($command as $c) {
+                for($i=0; $i < $c->product->count(); $i++){
+                    $product = Product::find($c->product[$i]->id);
+                    $quantityToAdd = $product->commands()->where('command_id', $command[0]->id)->first()->pivot->quantity;
+                    $product->quantity += $quantityToAdd;
+                    $product->save();
+                }
+            }
+            return back();
+        }
+
+
+    }
+
+    public function confirmCommand(Request $request)
+    {
+        $command = Command::with(['product' => function($query){
+                $query->withPivot('quantity');
+                }])->where('client_id', $request->user_id)
+                ->where('status', NULL)
+                ->get();
+
+        $PaymentInfoInsert = false;
+        $InsertPaymentMethod;
+
+
+        if($command){
+            $command[0]->update([
+                'status' => 'confirmed',
+            ]);
+
+
+            if($request->PaymentMethod == 'offline'){
+                $InsertPaymentMethod = $command[0]->update([
+                    'payment_method' => $request->PaymentMethod
+                ]);
+            }else{
+                $InsertPaymentMethod = $command[0]->update([
+                    'payment_method' => $request->PaymentMethod
+                ]);
+
+                if($InsertPaymentMethod){
+                    $request->validate([
+                        'client_id' => 'required|numeric',
+                        'card_number' => 'required|numeric|digits_between:13,19',
+                        'security_code' => 'required|numeric|digits:3',
+                        'expiration_month' => 'required|numeric|min:1|max:12',
+                        'expiration_year' => 'required|numeric|min:' . date('Y') . '|max:' . (date('Y') + 10),
+                    ]);
+
+                    $PaymentInfoInsert = PaymentInfo::create([
+                        'client_id' => $request->user_id,
+                        'card_number' => $request->card_number,
+                        'security_code' => $request->security_code,
+                        'expiration_month' => $request->expiration_month,
+                        'expiration_year' => $request->expiration_year
+                    ]);
+                }
+            }
+
+            if($PaymentInfoInsert || $InsertPaymentMethod){
+                foreach ($command as $c) {
+                    for($i=0; $i < $c->product->count(); $i++){
+                        $product = Product::find($c->product[$i]->id);
+                        $quantityToSubtract = $product->commands()->where('command_id', $command[0]->id)->first()->pivot->quantity;
+                        $product->quantity -= $quantityToSubtract;
+                        $product->save();
+                    }
+                }
+            }
+
+            return view('commande.confirmedCommand');
+        }else{
+
+            return back()->with('fail', 'Something went wrong! try again');
+        }
+
+    }
+
+
 }

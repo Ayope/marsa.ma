@@ -44,12 +44,12 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <input type="hidden" name="price" value="{{$product->price}}">
                 <input type="hidden" name="quantityOfProduct" value="{{$product->quantity}}">
                 <input type="hidden" name="user_id" value="{{Session::get('user')->id}}">
                 <input type="hidden" name="product_id" value="{{$product->id}}">
-                <button type="submit" class="btn btn-primary btn-sm my-3"><i class="bi bi-cart me-2" style="font-size:15px"></i>Add</button>
+                <button type="submit" class="btn btn-primary btn-sm my-3"><i class="bi bi-cart me-2" style="font-size:15px"></i>Add to cart</button>
             </form>
 
         </div>
@@ -57,6 +57,10 @@
     </div>
 
 </div>
+
+    @if(Session::has('loginUser'))
+        @include('components.footer')
+    @endif
 
 <style>
 

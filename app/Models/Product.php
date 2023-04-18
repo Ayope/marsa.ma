@@ -25,8 +25,8 @@ class Product extends Model
         return $this->hasOne(DeliveryMan::class);
     }
 
-    public function command(){
-        return $this->belongsToMany(Command::class,'product_commands');
+    public function commands(){
+        return $this->belongsToMany(Command::class,'product_commands')->withPivot('quantity');;
     }
 
     protected $fillable = [

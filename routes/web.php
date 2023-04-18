@@ -31,7 +31,9 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::controller(ProductController::class)->group(function(){
     Route::get('products', 'index')->name('products');
-    Route::get('store', 'E_store')->name('store');
+    Route::get('/', 'E_store')->name('store');
+    Route::get('/store', 'E_store');
+
     Route::get('show/{title}', 'show')->name('show');
 
     Route::get('productCreate', 'create')->name('productCreate');
@@ -52,6 +54,9 @@ Route::controller(CommandController::class)->group(function(){
     Route::post('deleteFromCart', 'deleteProductFromCart')->name('deleteFromCart');
     Route::post('updateQuantityPrice', 'updateQuantityPrice')->name('updateQuantityPrice');
     Route::get('checkout/{id}', 'checkout')->name('checkout');
+    Route::get('commandes/{id}', 'showCommands')->name('commandes');
+    Route::post('confirm', 'confirmCommand')->name('confirm');
+    Route::get('cancel/{user_id}/{command_id}', 'cancelCommand')->name('cancel');
 });
 
 // Route::controller(UserController::class)->group(function(){
