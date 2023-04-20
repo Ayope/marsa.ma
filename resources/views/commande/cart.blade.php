@@ -68,7 +68,7 @@
                                     @csrf
                                     <input type="hidden" name="user_id" value="{{Session::get('user')->id}}">
                                     <input type="hidden" name="product_id" value="{{$product['id']}}">
-                                    <button class="btn btn-danger exclude-opacity">Delete</button>
+                                    <button class="btn btn-danger exclude-opacity">Remove</button>
                                 </form>
                             </td>
                         </tr>

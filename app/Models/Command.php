@@ -17,14 +17,16 @@ class Command extends Model
     }
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'client_id');
     }
 
     public function product(){
         return $this->belongsToMany(Product::class, 'product_commands');
     }
 
-
+    public function productCommand(){
+        return $this->hasMany(ProductCommand::class, 'command_id');
+    }
 
     protected $fillable = [
         'delivery_man_id',

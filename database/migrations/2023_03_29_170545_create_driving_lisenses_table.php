@@ -20,8 +20,6 @@ return new class extends Migration
             $table->char('class', 1);
             $table->string('document')->nullable();
             $table->text('notes')->nullable();
-            $table->unsignedBigInteger('delivery_man_id');
-            $table->foreign('delivery_man_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

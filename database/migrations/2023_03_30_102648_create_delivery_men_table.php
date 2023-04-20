@@ -17,10 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('fisher_id')->nullable(); // nullable
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('driving_lisence_id');
-            $table->foreign('driving_lisence_id')->references('id')->on('driving_lisenses');
-            $table->foreign('delivery_man_id')->references('id')->on('users');
+            $table->foreign('driving_lisence_id')->references('id')->on('driving_lisenses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('delivery_man_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('fisher_id')->references('id')->on('users');
-            $table->foreign('vehicle_id')->references('id')->on('vehicles');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

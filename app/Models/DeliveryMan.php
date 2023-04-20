@@ -16,7 +16,7 @@ class DeliveryMan extends Model
     use HasFactory;
 
     public function vehicle(){
-        return $this->hasOne(Vehicle::class);
+        return $this->belongsTo(Vehicle::class, 'vehicle_id');
     }
 
     public function command(){
@@ -32,12 +32,12 @@ class DeliveryMan extends Model
     }
 
     public function user(){
-        return $this->hasOne(User::class, 'delivery_man_id');
+        return $this->belongsTo(User::class, 'delivery_man_id');
     }
 
     public function drivingLisense()
     {
-        return $this->hasOne(DrivingLisense::class);
+        return $this->belongsTo(DrivingLisense::class, 'driving_lisence_id');
     }
 
 

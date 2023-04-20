@@ -25,7 +25,6 @@ class DrivingLisenseFactory extends Factory
             'class' => $this->faker->randomElement(['A', 'B', 'C']),
             'document' =>  $this->faker->imageUrl,
             'notes' => $this->faker->sentence,
-            'delivery_man_id' =>  $this->faker->numberBetween(User::min('id'),User::max('id')),
         ];
     }
 }

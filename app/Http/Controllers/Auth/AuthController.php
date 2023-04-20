@@ -53,22 +53,6 @@ class AuthController extends Controller
                 'type' => ['required', 'string'],
                 'issuing_authority' => ['required', 'string'],
             ];
-
-        } else if ($request->role == 3) {
-            $additionalRules = [
-                'max_deliveries_in_day' => ['required', 'integer'],
-                // license
-                'issuing_place' => ['required', 'string'],
-                'class' => ['required', 'string', 'max:1'],
-                // vehicle
-                'registration_matricule' => ['required', 'string'],
-                'make' => ['required', 'string'],
-                'model' => ['required', 'string'],
-                'capacity' => ['required', 'integer'],
-                'photo' => ['required', 'image', 'mimes:jpeg,jpg,svg', 'max:2048'],
-                'type' => ['required', 'string'],
-                'insurance' => ['required', 'string'],
-            ];
         }
 
         $rules = array_merge($rules, $additionalRules, $commonValidation);
@@ -78,10 +62,6 @@ class AuthController extends Controller
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
-
-            if($request->role == 2 || $request->role == 3){
-                $docName = time().'.'.$request->file('document')->getClientOriginalName();
-            }
 
             $imgName = time().'.'.$request->file('img')->getClientOriginalName();
             $request->file('img')->move(public_path('profile-img'), $imgName);
@@ -99,6 +79,7 @@ class AuthController extends Controller
             if($request->role == 2){
                 $user->assignRole('fisher');
 
+                $docName = time().'.'.$request->file('document')->getClientOriginalName();
                 $request->file('document')->move(public_path('fishing-liscences-img'), $docName);
 
                 FishingLiscence::create([
@@ -114,49 +95,7 @@ class AuthController extends Controller
 
                 return redirect('login')->with('success', 'You registered successfully');
 
-            }else if($request->role == 3){
-
-                $request->file('document')->move(public_path('driving-liscences-img'), $docName);
-
-                $user->assignRole('deliveryMan');
-
-                $drivingLisence = DrivingLisense::create([
-                    'license_number' => $request->license_number,
-                    'issue_date' => $request->issue_date,
-                    'expiration_date' => $request->expiration_date,
-                    'notes' => $request->notes,
-                    'document' => $docName,
-                    'issuing_place' => $request->issuing_place,
-                    'class' => $request->class,
-                    'delivery_man_id' => $user->id
-
-                ]);
-
-                $photoName = time().'.'.$request->file('photo')->getClientOriginalName();
-                $request->file('photo')->move(public_path('vehicle-img'), $photoName);
-
-                $vehicle = Vehicle::create([
-                    'registration_matricule' => $request->registration_matricule,
-                    'make' => $request->make,
-                    'model' => $request->model,
-                    'capacity' => $request->capacity,
-                    'photo' => $photoName,
-                    'type' => $request->type,
-                    'insurance' => $request->insurance,
-                    'delivery_man_id' => $user->id
-                ]);
-
-                DeliveryMan::create([
-                    'max_deliveries_in_day'=> $request->max_deliveries_in_day,
-                    'delivery_man_id' => $user->id,
-                    'fisher_id' => NULL,
-                    'vehicle_id' => $vehicle->id,
-                    'driving_lisence_id' => $drivingLisence->id
-                ]);
-
-                return redirect('login')->with('success', 'You registered successfully');
-
-            }else if($request->role == 1){
+            } else if($request->role == 1){
                 $user->assignRole('client');
                 return redirect('login')->with('success', 'You registered successfully');
             }
@@ -189,7 +128,7 @@ class AuthController extends Controller
                 }
 
                 $request->session()->put('user', $user);
-                return redirect('product');
+                return redirect('/store');
 
             }else{
                 Session::pull('loginUser');

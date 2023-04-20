@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\CommandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DeliveryManController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +60,28 @@ Route::controller(CommandController::class)->group(function(){
     Route::post('confirm', 'confirmCommand')->name('confirm');
     Route::get('cancel/{user_id}/{command_id}', 'cancelCommand')->name('cancel');
 });
+
+
+// Route::controller(RatingController::class)->group(function(){
+//     Route::get('show', '');
+// });
+
+Route::controller(RatingController::class)->group(function(){
+    Route::get('rating', 'index');
+    Route::post('AddRating', 'store')->name('AddRating');
+
+});
+
+
+
+Route::controller(DeliveryManController::class)->group(function(){
+    Route::get('show_delivery_men', 'index')->name('showDeliveryMen');
+    Route::get('add_delivery_man', 'create')->name('addDeliveryMan');
+    Route::post('create_delivery_man', 'store')->name('createDeliveryMan');
+    Route::post('delete_Delivery_man/{id}', 'destroy')->name('deleteDeliveryman');
+    Route::get('show_delivery_man/{id}', 'show')->name('showDeliveryman');
+});
+
 
 // Route::controller(UserController::class)->group(function(){
 //     Route::get('profile', 'profile')->name('profile');

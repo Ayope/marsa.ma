@@ -13,10 +13,10 @@
 </div>
 
 <div class="d-flex justify-content-center mt-3 m-auto align-items-center flex-column" style="width:95%">
+    <h1>Your Products</h1>
     <div class="w-75 text-end mb-3">
         <a class="btn btn-primary px-5" href="{{route('productCreate')}}"><i class="bi bi-plus"></i>Add</a>
     </div>
-
     <div class="container-fluid table-responsive" >
         <table class="table table-bordered border-dark">
                 <thead>

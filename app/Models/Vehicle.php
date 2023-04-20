@@ -11,7 +11,7 @@ class Vehicle extends Model
     use HasFactory;
 
     public function DeliveryMan(){
-        return $this->hasOne(DeliveryMan::class);
+        return $this->hasOne(DeliveryMan::class, 'vehicle_id');
     }
 
     protected $fillable = [

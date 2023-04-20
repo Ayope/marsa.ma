@@ -209,7 +209,8 @@ class CommandController extends Controller
                         'expiration_month' => 'required|numeric|min:1|max:12',
                         'expiration_year' => 'required|numeric|min:' . date('Y') . '|max:' . (date('Y') + 10),
                     ]);
-
+                    /* if the user already insert his user infos for the first time he automatically gets
+                    the inputs filled and modify the payment infos if he want */
                     $PaymentInfoInsert = PaymentInfo::create([
                         'client_id' => $request->user_id,
                         'card_number' => $request->card_number,

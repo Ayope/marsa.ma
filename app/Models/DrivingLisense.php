@@ -27,6 +27,6 @@ class DrivingLisense extends Model
 
     public function deliveryMan()
     {
-        return $this->hasOne(DeliveryMan::class);
+        return $this->hasOne(DeliveryMan::class, 'driving_lisence_id');
     }
 }

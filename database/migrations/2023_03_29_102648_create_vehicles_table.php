@@ -18,10 +18,8 @@ return new class extends Migration
             $table->string('model');
             $table->integer('capacity');
             $table->string('photo');
-            $table->string('type');
+            $table->enum('type', ['Motorcycle', 'Pickup Truck', 'Van']);
             $table->string('insurance');
-            $table->unsignedBigInteger('delivery_man_id');
-            $table->foreign('delivery_man_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
