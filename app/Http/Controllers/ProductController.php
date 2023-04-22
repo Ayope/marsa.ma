@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Rating;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -86,10 +87,18 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($title)
+    public function show($title, Request $request)
     {
-        $product = Product::with('user')->where('title', $title)->first(); // get the ratings later
-        return view('product.storeShow', compact('product'));
+        $product = Product::with('user')->where('title', $title)->first();
+        $rating = Rating::with('user') // change it to id later cause title could be repeated 
+                ->whereHas('product', function ($q) use ($title){
+                    $q->where('title', $title);
+                })
+                ->orderBy('created_at', 'desc')->get();
+
+        $authUserRating = Rating::where('client_id', $request->session()->get('user')->id)->first();
+
+        return view('product.storeShow', compact('product', 'rating', 'authUserRating'));
     }
 
     /**

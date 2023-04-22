@@ -25,21 +25,24 @@
         @foreach ($products as $product)
 
         @if($product->status == 'available')
-
+        
+        @php
+            $ratingAverage = app('App\Http\Controllers\RatingController')->showRatingAverage($product->id);
+        @endphp
         <div class="col">
             <!-- card product -->
             <div class="card card-product" style="height:100%">
                 <div class="card-body">
 
                     <!-- badge -->
-                    <div class="text-center position-relative ">
-                        <div class=" position-absolute top-0 start-0">
+                    <div class="text-center position-relative">
+                        <div class="position-absolute top-0 start-0">
                             <span class="badge bg-danger">{{$product->status}}</span>
                         </div>
 
                         <a href="{{route('show', $product->title)}}">
                             <!-- img -->
-                            <img src="{{asset('products-img')}}\{{$product->photo}}" height="300px" width="300px" alt="{{$product->photo}}" class="mb-3 img-fluid">
+                            <img src="{{asset('products-img')}}\{{$product->photo}}" alt="{{$product->photo}}" class="mb-3" style="max-width: 100%; max-height: 200px;">
                         </a>
 
                     </div>
@@ -48,13 +51,15 @@
 
                     <div>
                     <!-- rating -->
-                    <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-half"></i>
+                    @if($ratingAverage)
+                    <small class="text-warning">
+                        <label class='ratings {{ $ratingAverage >= 1 ? "checked" : "" }}'>★</label>
+                        <label class='ratings {{ $ratingAverage >= 2 ? "checked" : "" }}'>★</label>
+                        <label class='ratings {{ $ratingAverage >= 3 ? "checked" : "" }}'>★</label>
+                        <label class='ratings {{ $ratingAverage >= 4 ? "checked" : "" }}'>★</label>
+                        <label class='ratings {{ $ratingAverage >= 5 ? "checked" : "" }}'>★</label>
                     </small>
-
+                    @endif
                     <span class="text-muted small"></span>
 
                     </div>
@@ -119,8 +124,7 @@
         font-size: 3rem;
         }
         .hero-image p {
-        /* font-size: 1.2rem; */
-        display: none;
+            display: none;
         }
     }
     @media(max-width: 400px){
@@ -129,6 +133,17 @@
         }
 
     }
+
+    .ratings{
+        font-size: 25px;
+        font-weight: 300;
+        color: gray;
+    }
+
+    .checked{
+        color: yellow;
+    }
+
     </style>
 
 @endsection

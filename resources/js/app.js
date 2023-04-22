@@ -1,6 +1,6 @@
 import './bootstrap';
 
-if (window.location.pathname === '/register' || window.location.pathname === '/add_delivery_man') {
+
 
     const image = document.getElementById('image');
     const imgInput = document.getElementById('imgInput')
@@ -27,4 +27,3 @@ if (window.location.pathname === '/register' || window.location.pathname === '/a
         reader.readAsDataURL(file);
     });
 
-}

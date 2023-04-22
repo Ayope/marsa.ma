@@ -17,6 +17,10 @@
 
                 @if($product->status == 'available')
 
+                @php
+                    $ratingAverage = app('App\Http\Controllers\RatingController')->showRatingAverage($product->id);
+                @endphp
+
                 <div class="col">
                     <!-- card product -->
                     <div class="card card-product" style="height:100%">
@@ -39,12 +43,15 @@
 
                             <div>
                             <!-- rating -->
-                            <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
+                            @if($ratingAverage)
+                            <small class="text-warning">
+                                <label class='ratings {{ $ratingAverage >= 1 ? "checked" : "" }}'>★</label>
+                                <label class='ratings {{ $ratingAverage >= 2 ? "checked" : "" }}'>★</label>
+                                <label class='ratings {{ $ratingAverage >= 3 ? "checked" : "" }}'>★</label>
+                                <label class='ratings {{ $ratingAverage >= 4 ? "checked" : "" }}'>★</label>
+                                <label class='ratings {{ $ratingAverage >= 5 ? "checked" : "" }}'>★</label>
                             </small>
+                            @endif
 
                             <span class="text-muted small"></span>
 
@@ -63,4 +70,19 @@
             @endforeach
         @endif
     </div>
+
+    <style>
+        
+    .ratings{
+        font-size: 25px;
+        font-weight: 300;
+        color: gray;
+    }
+
+    .checked{
+        color: yellow;
+    }
+
+
+    </style>
 @endsection

@@ -25,9 +25,32 @@ class RatingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
 
+    public function checkRating($user_id, $product_id){
+        $rating = Rating::where('client_id', $user_id)
+                        ->where('product_id', $product_id)
+                        ->first();
+        return $rating;
+    }
+
+    public function showRatingAverage($product_id){
+        $av = Rating::where('product_id', $product_id)->get();
+        $count = $av->count();
+        $total = 0;
+        foreach($av as $av){
+            $total += $av->ratings; 
+        }
+        if($count != 0 || $total != 0){
+            return $total / $count;
+        }
+
+        /*
+            - get all the ratings on this product
+            - calculate the average 
+            - show it in shape of stars 
+            be like:
+            4.5/5 ☆☆☆☆(☆) <= with this not colored in yellow
+        */
     }
 
     /**
@@ -79,16 +102,39 @@ class RatingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rating $rating)
+    public function update(Request $request)
     {
-        //
+                
+        $request->validate([
+            'rating' => 'required|numeric|min:1|max:5',
+            'review' => 'required|string'
+        ]);
+        
+        $rating = Rating::find($request->Rating_id);
+        
+        if($request->rating == $rating->ratings && $request->review == $rating->review){
+            return back();
+        }else{
+            $update = $rating->update([
+                'ratings' => $request->rating,
+                'review' => $request->review
+            ]);
+
+            if($update){
+                return back()->with('success', 'your review updated successfully');
+            }
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Rating $rating)
+    public function destroy($rating_id)
     {
-        //
+        $rating = Rating::find($rating_id);
+        
+        $rating->delete();
+
+        return back()->with('success', 'your review has deleted successfully');
     }
 }

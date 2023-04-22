@@ -25,7 +25,8 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'password',
+        'id',
+        'password'
     ];
 
     public function deliveryMan()
@@ -40,5 +41,9 @@ class User extends Authenticatable
 
     public function command(){
         return $this->hasMany(Command::class, 'client_id');
+    }
+
+    public function rating(){
+        return $this->hasMany(Rating::class, 'client_id');
     }
 }

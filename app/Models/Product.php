@@ -14,7 +14,7 @@ class Product extends Model
     use HasFactory;
 
     public function rating(){
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class, 'product_id');
     }
 
     public function user(){

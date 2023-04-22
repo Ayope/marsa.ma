@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\CommandController;
 use App\Http\Controllers\ProductController;
@@ -69,7 +70,8 @@ Route::controller(CommandController::class)->group(function(){
 Route::controller(RatingController::class)->group(function(){
     Route::get('rating', 'index');
     Route::post('AddRating', 'store')->name('AddRating');
-
+    Route::post('UpdateRating', 'update')->name('UpdateRating');
+    Route::get('deleteRating/{id}', 'destroy')->name('deleteRating');
 });
 
 
@@ -83,7 +85,9 @@ Route::controller(DeliveryManController::class)->group(function(){
 });
 
 
-// Route::controller(UserController::class)->group(function(){
-//     Route::get('profile', 'profile')->name('profile');
-//     Route::post('profile', 'editProfile')->name('profile');
-// });
+Route::controller(UserController::class)->group(function(){
+    // Route::get('profile', 'profile')->name('profile');
+    // Route::post('profile', 'editProfile')->name('profile');
+    Route::get('profile/{id}', 'show')->name('profile');
+    Route::post('profileUpdate', 'update')->name('profileUpdate');
+});

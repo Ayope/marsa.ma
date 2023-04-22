@@ -37,7 +37,7 @@
                                 src="{{asset('products-img')}}/{{$product['photo']}}"
                                 alt="product image">
                             <p class="card-text mb-0">{{$product['title']}}</p>
-                            <p class="card-text text-muted mb-0">Price: {{$product['price'] * $product['pivot']['quantity']}} DH</p>
+                            <p class="card-text text-muted mb-0">Price: {{$product['price']}} DH</p>
                             <p class="card-text text-muted small">QTT: {{$product['pivot']['quantity']}}</p>
                         </div>
                         @php
