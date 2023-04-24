@@ -43,17 +43,23 @@ Marsa.ma is an online platform that aims to facilitate the process of finding hi
 > I- A list of Users of application  
 > II- Block profiles
 
-2- Manage vehicles [Each vehicle have matricules and a name] :
+2- Manage delivery men
+> I- A list of delivery men
+> II- Add delivery men directly to the application to deliver commands  
+> III- Remove delivery men
+
+3- Manage vehicles :
 > I- A list of delivery men vehicles  
 > II- block vehicles
 
-3- Manage marketplace
+4- Manage marketplace
 > I- A list of the products in the marketplace  
 > II- Delete any unwanted products
 
-4- Manage ratings:
+5- Manage ratings:
 > I- A list of all ratings  
 > II- Delete rating
+
 
 ## As fisher I can:
 1- Manage my products:
@@ -64,10 +70,6 @@ Marsa.ma is an online platform that aims to facilitate the process of finding hi
 
 2- Manage commandes:
 > I- A list of all the commandes with their status (canceled - pending - confirmed - delivered)
-
-3- Manage delivery men
-> I- Add delivery men directly from the application to my team  
-> II- Remove delivery men from my team
 
 ## As delivery man I can:
 

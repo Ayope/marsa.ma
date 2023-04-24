@@ -7,7 +7,7 @@
             <div class="card mb-3">
                 <div class="d-flex justify-content-between card-header bg-success text-white">
                     <h5 class="mb-0">Address</h5>
-                    <a href="" class="d-flex align-items-center text-dark">
+                    <a href="{{route('profile', Session::get('user')->id)}}" class="d-flex align-items-center text-dark">
                         Modify {{-- this goes to the profile edit page --}}
                     </a>
                 </div>
@@ -26,7 +26,6 @@
                     <h5 class="mb-0">Delivery</h5>
                 </div>
                 <div class="card-body">
-                    {{-- turn this to english --}}
                     <p class="card-text">delivered to your addresss
                         <br> <span class="text-secondary">Our team gonna call you for confirmation</span>
                     </p>

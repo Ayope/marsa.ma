@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -22,34 +23,31 @@ class UserController extends Controller
             'email' => 'string|email',
             'phone' => 'string',
             'address' => 'string',
-            'img' => 'image|mimes:jpeg,jpg,svg|max:2048',
         ]);
 
+
         $user = User::find($request->session()->get('user')->id);
+        
+        if($request->hasFile('img')){
+            
+            $path = public_path('profile-img/'. $user->photo);
 
-// need to fix the image (take the image name and store it and delete the previous one)
+            if(file_exists($path) && $user->photo != null){
+                unlink($path);
+            }
 
-        // if ($request->filled('first_name') && Str::is($request->input('first_name'), $user->first_name)) {
-        //     if ($request->filled('last_name') && Str::is($request->input('last_name'), $user->last_name)) {
-        //         if ($request->filled('email') && Str::is($request->input('email'), $user->email)) {
-        //             if ($request->filled('phone') && Str::is($request->input('phone'), $user->phone)) {
-        //                             dd('hh');
+            $request->validate([
+                'img' => 'image|mimes:jpeg,jpg,svg|max:2048',
+            ]); 
+            
+            $imgName = time().'.'.$request->file('img')->getClientOriginalName();
+            $request->file('img')->move(public_path('profile-img'), $imgName);
+            
+            $user->update([
+                'photo' => $imgName,
+            ]);
+        }
 
-        //                 if ($request->filled('address') && Str::is($request->input('address'), $user->address)) {
-        //                             dd('hh');
-
-        //                     if ($request->filled('password') && Hash::check($request->input('password'), $user->password)) {
-        //                             dd('hh');
-        //                         if ($request->hasFile('img') && Str::is($request->file('img')->getClientOriginalName(), $user->photo)) {
-        //                             dd('hh');
-        //                             return back()->with('fail', 'No changes');
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }            
-        //     } 
-        // }
         
         $user->update([
             'first_name' => $request->first_name,
@@ -57,7 +55,6 @@ class UserController extends Controller
             'email' => $request->email,
             'phone_number' => $request->phone,
             'address' => $request->address,
-            'photo' => $request->img,
         ]);
 
         if($request->filled('password')){
@@ -67,10 +64,12 @@ class UserController extends Controller
             
             if(Hash::check($request->old_Password, $user->password)){
                 $user->update([
-                    'password' => $request->password
+                    'password' => Hash::make($request->password)
                 ]);
             }
         }
+
+        $request->session()->put('user', $user);
 
         return back()->with('success', 'updated successfully');
         

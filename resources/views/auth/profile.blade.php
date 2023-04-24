@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <h1 class="text-center mb-5 fw-bold">Edit your profile</h1>
                     <form method="POST" action="{{route('profileUpdate')}}" enctype="multipart/form-data">
-                    @csrf
+                        @csrf
                         @if(Session::has('success'))
                         <div class="alert alert-success">{{Session::get('success')}}</div>
                         @endif
@@ -109,7 +109,7 @@
                                 <label for="old_Password" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Old password') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="old_Password" type="old_Password" class="form-control @error('old_Password') is-invalid @enderror" name="old_Password" autocomplete="new-old_Password">
+                                    <input id="old_Password" type="password" class="form-control @error('old_Password') is-invalid @enderror" name="old_Password" autocomplete="new-old_Password">
 
                                     @error('old_Password')
                                         <span class="invalid-feedback" role="alert">
@@ -259,7 +259,6 @@
                                         Update
                                     </button>
 
-                                    <a href="{{url()->previous()}}" class="btn btn-secondary">Cancel</a>
                                 </div>
                             </div>
                         </div>
@@ -278,25 +277,55 @@
 </style>
 
 <script>
-  const inputs = document.querySelectorAll('input');
-  const updateBtn = document.querySelector('#updateBtn');
+    // Get the input fields you want to watch for changes
+    const imgInput = document.getElementById('imgInput');
+    const firstNameInput = document.getElementById('first_name');
+    const lastNameInput = document.getElementById('last_name');
+    const phoneInput = document.getElementById('phone');
+    const addressInput = document.getElementById('address');
+    const emailInput = document.getElementById('email');
+    const oldPasswordInput = document.getElementById('old_Password');
+    const newPasswordInput = document.getElementById('password');
+    const passwordConfirmInput = document.getElementById('password-confirm');
 
-  // Disable the update button initially
-  updateBtn.disabled = true;
+    // Get the update button
+    const updateButton = document.getElementById('updateBtn');
 
-  // Add event listeners to input fields
-  inputs.forEach(input => {
-    input.addEventListener('input', () => {
-      // Check if the value has been changed or not
-      const changed = Array.from(inputs).some(input => {
-        return input.value !== input.getAttribute('value');
-      });
+    // Disable the update button initially
+    updateButton.disabled = true;
 
-      // Enable/disable the update button based on the changed flag
-      updateBtn.disabled = !changed;
-    });
+    // Add event listeners to the input fields to watch for changes
+    imgInput.addEventListener('change', enableUpdateButton);
+    firstNameInput.addEventListener('input', enableUpdateButton);
+    lastNameInput.addEventListener('input', enableUpdateButton);
+    phoneInput.addEventListener('input', enableUpdateButton);
+    addressInput.addEventListener('input', enableUpdateButton);
+    emailInput.addEventListener('input', enableUpdateButton);
+    oldPasswordInput.addEventListener('input', enableUpdateButton);
+    newPasswordInput.addEventListener('input', enableUpdateButton);
+    passwordConfirmInput.addEventListener('input', enableUpdateButton);
 
-  });
+    // Function to enable the update button if any input value has changed
+    function enableUpdateButton() {
+    // If any input value has changed from its initial value
+    if (
+        imgInput.value !== imgInput.defaultValue ||
+        firstNameInput.value !== firstNameInput.defaultValue ||
+        lastNameInput.value !== lastNameInput.defaultValue ||
+        phoneInput.value !== phoneInput.defaultValue ||
+        addressInput.value !== addressInput.defaultValue ||
+        emailInput.value !== emailInput.defaultValue ||
+        oldPasswordInput.value !== oldPasswordInput.defaultValue ||
+        newPasswordInput.value !== newPasswordInput.defaultValue ||
+        passwordConfirmInput.value !== passwordConfirmInput.defaultValue
+    ) {
+        // Enable the update button
+        updateButton.disabled = false;
+    } else {
+        // Otherwise, keep the update button disabled
+        updateButton.disabled = true;
+    }
+    }
 </script>
 
 @endsection

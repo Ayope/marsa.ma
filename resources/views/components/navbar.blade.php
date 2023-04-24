@@ -37,16 +37,22 @@
                 @endif
                 <!-- Authentication Links -->
                 <li class="nav-item dropdown d-flex ">
-             
-                    <a href="{{route('profile', Session::get('user')->id)}}" class="mt-2 ms-2">
-                        <img src="{{asset('profile-img')}}/{{Session::get('user')->photo}}" height="40px" width="40px" class="rounded-circle" alt="{{Session::get('user')->first_name . ' ' . Session::get('user')->last_name}}">
+                        
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <img src="{{asset('profile-img')}}/{{Session::get('user')->photo}}" height="40px" width="40px" class="rounded-circle" alt="{{Session::get('user')->first_name . ' ' . Session::get('user')->last_name}}">                        
                     </a>
 
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle mt-1 fs-4" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{-- change the src by an input comes from database --}}
-                    </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <p class="dropdown-item">
+                            Signed in as 
+                            <a href="{{route('profile', Session::get('user')->id)}}" class="text-decoration-none fw-bolder text-dark">
+                                {{Session::get('user')->first_name . ' ' . Session::get('user')->last_name}}
+                            </a>
+                        </p>
+
+                        <hr>
+                        
                         <a class="dropdown-item" href="{{route('commandes', Session::get('user')->id)}}">
                             {{ __('Orders') }}
                         </a>
