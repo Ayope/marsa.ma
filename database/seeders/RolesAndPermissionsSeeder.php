@@ -18,36 +18,52 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        // $permissions = [
 
-        //     'view_books',
-        //     'book_create',
-        //     'book_edit',
-        //     'book_show',
-        //     'book_delete',
+        $permissions = [
 
-        //     'view_users', // with role
-        //     'view_roles',
-        //     'role_create',
-        //     'role_edit',
-        //     'role_show',
-        //     'role_delete',
-        //     'edit_user_role',
+            'buy_product',
 
-        //     'view_genres',
-        //     'genre_create',
-        //     'genre_edit',
-        //     'genre_show',
-        //     'genre_delete',
-        //     'genre_filter',
+            'view_commands',
+            'command_show',
+            'command_cancel',
 
-        // ];
+            'view_ratings',
+            'rating_create',
+            'rating_edit',
+            'rating_show',
+            'rating_delete',
 
-        // foreach ($permissions as $permission)   {
-        //     Permission::create([
-        //         'name' => $permission
-        //     ]);
-        // }
+            'view_products',
+            'product_create',
+            'product_edit',
+            'product_show',
+            'product_delete',
+
+            'view_users',
+            'user_modify',
+            'user_show',
+            'user_delete',
+
+            'deliveryMan_create',
+            'deliveryMan_edit',
+            'deliveryMan_show',
+            'deliveryMan_delete',
+            'edit_user_deliveryMan',
+
+            'view_genres',
+            'genre_create',
+            'genre_edit',
+            'genre_show',
+            'genre_delete',
+            'genre_filter',
+
+        ];
+
+        foreach ($permissions as $permission)   {
+            Permission::create([
+                'name' => $permission
+            ]);
+        }
 
         // Create roles and assign it permissions to it
 

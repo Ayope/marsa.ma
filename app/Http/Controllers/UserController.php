@@ -74,4 +74,11 @@ class UserController extends Controller
         return back()->with('success', 'updated successfully');
         
     }
+
+    public function roleCount($role){
+        $user = User::whereHas('roles', function($q) use ($role){
+            $q->where('name', $role);
+        })->count();
+        return $user;
+    }
 }

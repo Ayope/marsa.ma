@@ -93,3 +93,9 @@ don't give the user the ratings only if he had a confirmed command containing th
 go back to the command and link it to the user 
 fix also the logic of the application (product (n) added to the command by the user -> product (n) added by this fisher(n) -> this fisher(n) have this delivery man(n) -> assign the command with the product to the delivery man (n) -> illogic (this way the user will get a lot of delivery men (cause every fisher have a delivery man) ))
 to fix it make the admin who add the delivery man and then the commands get assigned automatically to the delivery men day per day (and by considering (max_deliveries_per_day)) and remove the link between the fisher and the delivery man
+
+
+presentation and figma
+https://www.canva.com/design/DAFhDaxKr-M/S-h_2s0k4gZGbVlQLod-LA/edit?analyticsCorrelationId=d46d9b53-79b4-4d43-9e87-cfb1264e11e9
+https://www.figma.com/file/EUkhcIg2Aubxvp2YEjiYLZ/Untitled?node-id=0-1&t=WgvsAxGUVxSsWObF-0
+https://ayoub1.atlassian.net/jira/software/projects/MARSA/boards/1

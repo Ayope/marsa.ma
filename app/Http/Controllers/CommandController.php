@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Command;
 use App\Models\Product;
+use App\Models\DeliveryMan;
 use App\Models\PaymentInfo;
 use Illuminate\Http\Request;
 use App\Models\ProductCommand;
@@ -232,6 +233,16 @@ class CommandController extends Controller
                 }
             }
 
+            $deliveryMan = DeliveryMan::where('max_deliveries_in_day', '<=' ,'current_task')->first();
+
+            dd($deliveryMan);
+
+            $command[0]->update([
+                'delivery_man_id' => $deliveryMan->delivery_man_id,
+            ]);
+
+
+
             return view('commande.confirmedCommand');
         }else{
 
@@ -240,5 +251,11 @@ class CommandController extends Controller
 
     }
 
-
+    public function Commandcount($status = NULL){
+        if(isset($status)){
+            return Command::where('status', $status)->count();
+        }else{
+            return Command::count();
+        }
+    }
 }

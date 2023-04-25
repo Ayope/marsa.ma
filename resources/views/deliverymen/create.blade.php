@@ -18,12 +18,11 @@
                             <div class="alert alert-danger">{{Session::get('fail')}}</div>
                         @endif
 
-                    <input type="hidden" name="fisher_id" value="{{Session::get('user')->id}}">
 
                     <div class="d-flex containner">
                         <div>
                             <div class="mb-3 img w-25 w-100">
-                                <img id="image" src={{asset('images/yourPicture.png')}} height="140px" width="140px" style="border-radius:50%; cursor: pointer;"/>
+                                <img id="image" src="{{asset('images/yourPicture.png')}}" height="140px" width="140px" style="border-radius:50%; cursor: pointer;"/>
                                 <input type="file" id="imgInput" name="img"  style="display: none;" class="@error('img') is-invalid @enderror"/>
 
                                 @error('img')

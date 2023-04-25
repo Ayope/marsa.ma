@@ -82,12 +82,14 @@ Route::controller(DeliveryManController::class)->group(function(){
     Route::post('create_delivery_man', 'store')->name('createDeliveryMan');
     Route::post('delete_Delivery_man/{id}', 'destroy')->name('deleteDeliveryman');
     Route::get('show_delivery_man/{id}', 'show')->name('showDeliveryman');
+    Route::get('edit_delivery_man/{id}', 'edit')->name('editDeliveryman');
+    Route::post('update_delivery_man', 'update')->name('updateDeliveryman');
 });
 
 
 Route::controller(UserController::class)->group(function(){
-    // Route::get('profile', 'profile')->name('profile');
-    // Route::post('profile', 'editProfile')->name('profile');
     Route::get('profile/{id}', 'show')->name('profile');
     Route::post('profileUpdate', 'update')->name('profileUpdate');
 });
+
+Route::view('admin', 'dashboards.admin.dashboard');

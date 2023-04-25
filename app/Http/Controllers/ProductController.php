@@ -195,4 +195,8 @@ class ProductController extends Controller
         return view('product.search', compact('products'));
 
     }
+
+    public function productCount(){
+        return Product::count();
+    }
 }

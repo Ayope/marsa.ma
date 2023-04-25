@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class RatingController extends Controller
 {
+    public function index(){
+        $ratings = Rating::with('product', 'user')->orderBy('created_at', 'DESC')->get();
+        return view('rating.index', compact('ratings'));
+    }
+
+
     /* this function check if the user can't add a rating until he have a confirmed command
     with this product in it */
     public function checkUser($user_id, $product_id){
@@ -44,21 +50,6 @@ class RatingController extends Controller
             return $total / $count;
         }
 
-        /*
-            - get all the ratings on this product
-            - calculate the average 
-            - show it in shape of stars 
-            be like:
-            4.5/5 ☆☆☆☆(☆) <= with this not colored in yellow
-        */
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -83,21 +74,6 @@ class RatingController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Rating $rating)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Rating $rating)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

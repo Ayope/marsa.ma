@@ -29,12 +29,11 @@
                     <th scope="col" style="width: 15%;">Phone Number</th>
                     <th scope="col" style="width: 20%;">Address</th>
                     <th scope="col">Max Deliveries in Day</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" style="width: 10%;">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($deliverymen as $deliveryman)
-                    @if($deliveryman->fisher_id == Session::get('user')->id)
                     <tr>
                         <td><img src="{{asset('profile-img') }}/{{$deliveryman->user->photo}}" alt="{{ $deliveryman->user->first_name }} {{ $deliveryman->user->first_name }}" width="150px" height="auto"></td>
                         <td>{{ $deliveryman->user->first_name }}</td>
@@ -56,10 +55,13 @@
                                     See More
                                     <i class="bi bi-eye"></i>
                                 </a>
+                                <a href="{{route('editDeliveryman', $deliveryman->user->id)}}" class="btn btn-primary mt-2">
+                                    Update
+                                    <i class="bi bi-pencil"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>
-                    @endif
                 @endforeach
             </tbody>
         </table>
