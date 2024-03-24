@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('delivery_men', function (Blueprint $table) {
             $table->unsignedInteger('max_deliveries_in_day');
+            $table->unsignedInteger('current_task');
             $table->unsignedBigInteger('delivery_man_id');
-            $table->unsignedBigInteger('fisher_id');
             $table->unsignedBigInteger('vehicle_id');
-            $table->foreign('delivery_man_id')->references('id')->on('users');
-            $table->foreign('fisher_id')->references('id')->on('users');
-            $table->foreign('vehicle_id')->references('id')->on('vehicles');
+            $table->unsignedBigInteger('driving_lisence_id');
+            $table->foreign('driving_lisence_id')->references('id')->on('driving_lisenses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('delivery_man_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

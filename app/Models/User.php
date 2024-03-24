@@ -5,13 +5,14 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\DeliveryMan;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     protected $fillable = [
         'first_name',
@@ -24,13 +25,25 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'password',
+        'id',
+        'password'
     ];
 
     public function deliveryMan()
     {
-        return $this->hasOne(DeliveryMan::class);
+        return $this->hasOne(DeliveryMan::class , 'delivery_man_id');
     }
 
+    public function product(){
 
+        return $this->hasMany(Product::class, 'fisher_id');
+    }
+
+    public function command(){
+        return $this->hasMany(Command::class, 'client_id');
+    }
+
+    public function rating(){
+        return $this->hasMany(Rating::class, 'client_id');
+    }
 }

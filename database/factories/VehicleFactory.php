@@ -22,11 +22,9 @@ class VehicleFactory extends Factory
             'make' => $this->faker->word(),
             'model' => $this->faker->word(),
             'capacity' => $this->faker->numberBetween(1, 10),
-            'delivery_man' => $this->faker->name(),
             'photo' => $this->faker->imageUrl(640, 480, 'transport'),
-            'type' => $this->faker->randomElement(['car', 'motorcycle', 'truck']),
+            'type' => $this->faker->randomElement(['Van', 'Motorcycle', 'Pickup Truck']),
             'insurance' => $this->faker->randomElement(['valid', 'expired']),
-            'delivery_man_id' => $this->faker->numberBetween(User::min('id'),User::max('id')),
         ];
     }
 }

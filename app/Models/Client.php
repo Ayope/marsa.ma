@@ -16,10 +16,6 @@ class Client extends Model
         return $this->hasMany(Command::class);
     }
 
-    public function rating(){
-        return $this->hasMany(Rating::class);
-    }
-
     public function paymentInfo(){
         return $this->hasOne(PaymentInfo::class);
     }

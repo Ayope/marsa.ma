@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             VehicleSeeder::class,
+            DrivingLisenseSeeder::class,
             DeliveryManSeeder::class,
             JobOfferSeeder::class,
             ProductSeeder::class,
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
             PaymentInfoSeeder::class,
             ProductCommandSeeder::class,
             RatingSeeder::class,
+            RolesAndPermissionsSeeder::class,
         ]);
     }
 }

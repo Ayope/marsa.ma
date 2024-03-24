@@ -12,7 +12,7 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

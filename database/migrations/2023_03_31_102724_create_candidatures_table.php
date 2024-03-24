@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('fisher_id')->references('id')->on('users');
             $table->unsignedBigInteger('candidate_id');
             $table->foreign('candidate_id')->references('id')->on('users');
-            $table->string('status');
+            $table->enum('status', ['pending', 'accepted', 'rejected']);
             $table->timestamps();
 
         });

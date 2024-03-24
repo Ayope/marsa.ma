@@ -1,0 +1,101 @@
+CRUDs:
+profile - prod	 - jobOffer - candidature 
+
+-------|> User stories: <|--------
+
+----Authentification:
+
+As user I can create profile and choose to be delivery man or fisher
+As user I can  connect to the application using my informations
+As user I can update profile
+As user I can reset password 
+
+
+----product:
+
+As fisher I can add modify delete product 
+
+
+----Jobing:
+
+As fisher I can add job offers to the application
+
+As fisher I can get all the candidatures on my job offer
+
+As deliveryman I can create, delete a candidature to a jobOffer
+
+----Rating:
+
+As client I can create add modify delete a rating of a product 
+
+----delivering :
+
+As deliveryman I can create update and delete a vehicle
+
+As deliveryman I can view  commandes on my associated fisher's products to deliver
+
+As fisher I can view commandes on my products with the delivery man associated with
+
+As fisher I can cancel commande on specific product 
+
+As client I can create , delete a command contain couple of products 
+ 
+----administration:
+
+As admin I can view all profiles and delete profile
+As admin I can view all products and delete product
+As admin I can view all ratings and delete rating
+As admin I can view all jobOffers and delete jobOffer
+
+week 10/04/2023 - 15/04/2023:
+CRUDs:
+--> profile / product / rating / commande 
+--> the Ecommerce part of the website
+	- front-end and backend
+--> Soft delete using laravel
+
+
+10/04/2023:
+
+- fix the front-end structure (blade) (Done)
+- login (get the informations of the user after login)  (Done)
+- products (  (Done)
+	- crud products by an interface of the fisher
+	- get products to the user interface with a design of the e-commerce website
+)
+
+11/04/2023:
+- Complete the CRUD of products
+
+12/04/2023:
+- show product page
+
+13/04/2023:
+- Commands (
+	- do crud of commands 
+	- make the mechanism of the add to cart and confirm command
+	- when the user confirm the cart products it goes to the delivery guy tasks
+)
+
+14/04/2023:
+- Commands (
+	- delete command 
+	- confirm command
+	- turn the available to green color 
+	- soft delete 
+)
+
+- add a footer 
+
+don't give the user the ratings only if he had a confirmed command containing this product
+
+
+go back to the command and link it to the user 
+fix also the logic of the application (product (n) added to the command by the user -> product (n) added by this fisher(n) -> this fisher(n) have this delivery man(n) -> assign the command with the product to the delivery man (n) -> illogic (this way the user will get a lot of delivery men (cause every fisher have a delivery man) ))
+to fix it make the admin who add the delivery man and then the commands get assigned automatically to the delivery men day per day (and by considering (max_deliveries_per_day)) and remove the link between the fisher and the delivery man
+
+
+presentation and figma
+https://www.canva.com/design/DAFhDaxKr-M/S-h_2s0k4gZGbVlQLod-LA/edit?analyticsCorrelationId=d46d9b53-79b4-4d43-9e87-cfb1264e11e9
+https://www.figma.com/file/EUkhcIg2Aubxvp2YEjiYLZ/Untitled?node-id=0-1&t=WgvsAxGUVxSsWObF-0
+https://ayoub1.atlassian.net/jira/software/projects/MARSA/boards/1

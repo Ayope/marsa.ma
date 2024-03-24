@@ -1,0 +1,37 @@
+@media only screen and (max-width: 768px){
+    .img{
+        display: flex;
+        justify-content: center;
+    }
+
+}
+
+@media only screen and (max-width: 1000px){
+    .containner{
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+body{
+    background-image: url('../../public/images/pexels-photo-6313478.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat ;
+    min-height: 100vh;
+}
+
+.AuthContainer{
+    background: rgba( 255, 255, 255, 0.3 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 2px );
+    -webkit-backdrop-filter: blur( 2px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+/* .opacity:not(#app > main > div > div.table-responsive > table > tbody > tr.table-secondary.opacity > td:nth-child(6) > a) {
+    opacity: 0.5;
+} */
+.table tbody tr .table-secondary:last-child td:not(.exclude-opacity) {
+    opacity: 1;
+}

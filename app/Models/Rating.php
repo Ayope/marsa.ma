@@ -11,12 +11,12 @@ class Rating extends Model
 {
     use HasFactory;
 
-    public function client(){
-        return $this->hasOne(Client::class);
+    public function user(){
+        return $this->belongsTo(User::class, 'client_id');
     }
 
     public function product(){
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     protected $fillable = [

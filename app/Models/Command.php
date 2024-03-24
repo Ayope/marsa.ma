@@ -16,19 +16,23 @@ class Command extends Model
         return $this->hasOne(DeliveryMan::class);
     }
 
-    public function client(){
-        return $this->hasOne(Client::class);
+    public function user(){
+        return $this->belongsTo(User::class, 'client_id');
     }
 
     public function product(){
-        return $this->hasOneMany(Product::class, 'product_commands');
+        return $this->belongsToMany(Product::class, 'product_commands');
+    }
+
+    public function productCommand(){
+        return $this->hasMany(ProductCommand::class, 'command_id');
     }
 
     protected $fillable = [
         'delivery_man_id',
         'client_id',
         'status',
-        'payment_method'
+        'payment_method',
     ];
 
     protected $hidden = [
