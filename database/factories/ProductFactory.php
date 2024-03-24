@@ -25,6 +25,8 @@ class ProductFactory extends Factory
             'price' => $this->faker->numberBetween(1, 1000),
             'date_of_fishing' => $this->faker->date,
             'description' => $this->faker->paragraph,
+            'status' => $this->faker->randomElement(['available', 'sold out', 'rejected']),
+            // rejected by admin
             'fisher_id' => $this->faker->numberBetween(User::min('id'),User::max('id')) // where role is fisher
         ];
     }

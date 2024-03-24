@@ -25,6 +25,7 @@ class JobOffer extends Model
         'deliveries_per_day',
         'salary',
         'vehicle_required',
+        'status',
         'fisher_id',
     ];
 

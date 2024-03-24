@@ -37,6 +37,7 @@ class Product extends Model
         'price',
         'date_of_fishing',
         'description',
+        'status',
         'fisher_id',
     ];
 

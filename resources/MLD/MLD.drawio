@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="epNNROfHkKnDNLngfpTh">
-        <mxGraphModel dx="408" dy="2666" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="630" dy="2624" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -27,12 +27,12 @@
                     <mxGeometry y="26" width="160" height="154" as="geometry"/>
                 </mxCell>
                 <mxCell id="-N1TcMKGQXpCPjwiUiGK-44" value="Product" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="830" y="-2010" width="160" height="170" as="geometry">
+                    <mxGeometry x="830" y="-2010" width="150" height="180" as="geometry">
                         <mxRectangle x="500" y="-190" width="70" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="-N1TcMKGQXpCPjwiUiGK-45" value="*id&#10;title&#10;fishType&#10;phtoto&#10;quantity&#10;price&#10;dateOfFishing&#10;description&#10;*fisherID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="-N1TcMKGQXpCPjwiUiGK-44" vertex="1">
-                    <mxGeometry y="26" width="160" height="144" as="geometry"/>
+                <mxCell id="-N1TcMKGQXpCPjwiUiGK-45" value="*id&#10;title&#10;fishType&#10;phtoto&#10;quantity&#10;price&#10;dateOfFishing&#10;description&#10;*fisherID&#10;status " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="-N1TcMKGQXpCPjwiUiGK-44" vertex="1">
+                    <mxGeometry y="26" width="150" height="154" as="geometry"/>
                 </mxCell>
                 <mxCell id="-N1TcMKGQXpCPjwiUiGK-48" value="JobOffers" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
                     <mxGeometry x="620" y="-1290" width="160" height="170" as="geometry">

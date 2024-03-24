@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('deliveries_per_day');
             $table->integer('salary');
             $table->string('vehicle_required');
+            $table->string('status');
             $table->unsignedBigInteger('fisher_id');
             $table->foreign('fisher_id')->references('id')->on('users');
             $table->timestamps();

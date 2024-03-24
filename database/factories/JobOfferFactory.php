@@ -23,6 +23,8 @@ class JobOfferFactory extends Factory
             'salary' => $this->faker->randomFloat(2, 1000, 5000),
             'deliveries_per_day' => $this->faker->numberBetween(1, 10),
             'vehicle_required' => $this->faker->sentence(),
+            'status' => $this->faker->randomElement(['available', 'archived', 'rejected']),
+            // rejected by admin
             'fisher_id' => $this->faker->numberBetween(User::min('id'),User::max('id')),
         ];
     }
